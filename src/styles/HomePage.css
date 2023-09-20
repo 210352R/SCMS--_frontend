@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.All {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  /* Set the background image URL */
+  background-image: url("../images/Supply\ Chain\ Jobs_\ Procurement\,\ Logistics\,\ and\ Management.jpg");
+
+  /* Set the background image to cover the entire viewport */
+  background-size: cover;
+
+  /* Center the background image vertically and horizontally */
+  background-position: center center;
+
+  /* Ensure the background image covers the entire viewport */
+  background-attachment: fixed;
+
+  /* Add a background color as a fallback in case the image doesn't load */
+  background-color: #f2f2f2;
+}
+
+.mmv {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.textFeild {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+  color: antiquewhite !;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.main {
+  color: white;
+  overflow: auto;
+}
+.topic {
+  font-size: 70px;
+  font-weight: 700;
+  font-stretch: expanded;
+}
+.transparent-button {
+  background-color: rgba(0, 0, 0, 0.2); /* Adjust the alpha value as needed */
+  border: 2px solid white;
+  border-radius: 10px;
+  color: white; /* Text color */
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.navBarWrapper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.link-no-decoration {
+  text-decoration: none; /* Remove underlines and default link styles */
+  color: white; /* Use the default text color of the parent element */
+  /* You can add more styles as needed */
+}
+.link-no-decoration:hover {
+  color: #f2f2f2;
+}

@@ -1,0 +1,67 @@
+/* dashboard.css */
+
+/* Custom styles for the sidebar */
+.nav-pills .nav-link {
+  color: #fff; /* Text color for sidebar links */
+}
+
+/* Custom styles for the main content */
+.col {
+  background-color: #f8f9fa; /* Background color for the main content */
+}
+/* Update background color and padding for the sidebar */
+.br-rd {
+  background-color: #333; /* Dark background color */
+  padding-top: 1rem;
+}
+
+/* Style for the "Dashboard" text */
+.fs-4 {
+  font-size: 28px; /* Custom font size */
+  font-weight: bold; /* Make it bold */
+  color: #fff; /* Text color */
+  margin-bottom: 20px; /* Add space below "Dashboard" text */
+}
+
+/* Style for sidebar links */
+.nav-link {
+  color: #fff; /* Text color */
+  font-size: 22px; /* Custom font size */
+  margin-bottom: 8px; /* Add space between links */
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+/* Hover effect for sidebar links */
+.nav-link:hover {
+  color: #17a2b8; /* Change color on hover */
+  font-size: 23px;
+  text-decoration: underline; /* Remove underline on hover */
+}
+
+/* Style for the user profile dropdown */
+.dropdown-toggle {
+  font-size: 18px; /* Custom font size */
+}
+
+/* Style for the dropdown menu items */
+.dropdown-item {
+  color: #ffffff; /* Text color */
+}
+
+/* Style for the user profile image */
+.rounded-circle {
+  border: 2px solid #17a2b8; /* Add border with a custom color */
+}
+
+/* Style for the user profile dropdown on hover */
+.dropdown:hover .dropdown-menu {
+  display: block; /* Show dropdown menu on hover */
+}
+
+/* Style for the active menu item */
+.nav-item.active .nav-link {
+  background-color: #17a2b8; /* Custom background color for active item */
+}
+.custom-icon {
+  font-size: 21px;
+}

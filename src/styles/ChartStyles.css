@@ -1,0 +1,13 @@
+/* ChartStyles.css */
+.chart-container {
+  border: 2px solid #ddd;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  border-color: black;
+}
+
+.chart-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}

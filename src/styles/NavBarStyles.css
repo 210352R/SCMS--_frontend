@@ -1,0 +1,15 @@
+/* Your project's CSS file */
+.transparent-navbar {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.nav-link {
+  color: white;
+  font-size: 22px;
+}
+.nav-link:hover {
+  color: white;
+  text-decoration: underline;
+}

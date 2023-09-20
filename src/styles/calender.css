@@ -1,0 +1,46 @@
+/* Calender.css */
+
+/* Style the container */
+.calender-container {
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+/* Style the calendar component */
+.custom-calendar {
+  background-color: #f2f2f2;
+  border: 1px solid #060606;
+  border-radius: 8px;
+  padding: 10px;
+
+  /* Adjust height and width */
+  width: 400px; /* Adjust the width as needed */
+  height: 500px; /* Adjust the height as needed */
+}
+
+/* Customize the appearance of the calendar */
+/* You can style specific elements within the calendar as needed */
+.custom-calendar .MuiPickersToolbar-toolbar {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.custom-calendar .MuiDialogActions-root {
+  display: none;
+}
+
+.custom-calendar .MuiPickersDay-day {
+  font-size: 40px; /* Adjust the font size as needed */
+}
+
+.custom-calendar .MuiPickersDay-day {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.custom-calendar .MuiPickersDay-daySelected {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+/* Add more styles to customize the calendar further */

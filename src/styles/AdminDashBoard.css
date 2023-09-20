@@ -1,0 +1,26 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-image: url("../images/Supply\ Chain\ Jobs_\ Procurement\,\ Logistics\,\ and\ Management.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-blend-mode: darken;
+}
+
+/* AdminDashBoard.css */
+.luminous-border {
+  border: 2px solid transparent;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Adjust the shadow color and intensity as needed */
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.luminous-border:hover {
+  border-color: rgba(0, 0, 255, 0.5); /* Change the border color on hover */
+  box-shadow: 0 0 20px rgba(0, 0, 255, 0.5); /* Change the shadow color and intensity on hover */
+}
