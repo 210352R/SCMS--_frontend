@@ -1,0 +1,9 @@
+.allContainer {
+  margin: 5px;
+  padding: 2px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.img-dec {
+  border-radius: 20px;
+}

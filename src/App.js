@@ -18,11 +18,18 @@ import Calender from "./components/Calender";
 import Dashboard from "./pages/CustomerSide/Dashboard";
 import ScriptTag from "react-script-tag";
 import AddminDashboard from "./pages/Admin/AddminDashboard";
+import PieChartContainer from "./components/PieChartContainer";
+import CoordinaterDashboard from "./pages/Coordinater/CoDashBoard";
+import OrderCard from "./components/cards/OrderCard";
+import Test from "./pages/Test";
+import HomeCardsContainer from "./components/cards/HomeCardsContainer";
+import Footer from "./components/HomeFooter/Footer";
+
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<AddminDashboard />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/customerLogin" element={<CustomerLoginPage />} />
         <Route
           path="/customerRegister"
@@ -33,8 +40,12 @@ function App() {
           path="/coordinaterRegister"
           element={<CoordinaterRegistrationForm />}
         />
+        <Route path="/adminboard" element={<AddminDashboard />} />
       </Routes>
     </Router>
+    // <>
+    //   <HomePage />
+    // </>
   );
 }
 

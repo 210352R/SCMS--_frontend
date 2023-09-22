@@ -11,6 +11,8 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
+import "./NavBar.css";
+
 export const mainListItems = (
   <React.Fragment>
     <ListItemButton>
@@ -19,11 +21,13 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItemButton>
-    <Link to="/customerLogin">
+
+    <Link to="/customerLogin" className="link-no-decoration">
       <ListItemButton>
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
+
         <ListItemText primary="Orders" />
       </ListItemButton>
     </Link>
@@ -44,7 +48,7 @@ export const mainListItems = (
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="Integrations" />
+      <ListItemText primary="Stores" />
     </ListItemButton>
   </React.Fragment>
 );

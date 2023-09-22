@@ -11,3 +11,14 @@
   font-size: 24px;
   margin-bottom: 20px;
 }
+
+.piechart-container {
+  border: 2px solid #ddd;
+  height: 100%;
+  width: 100%;
+  padding: 2px;
+  align-items: center;
+  justify-content: center;
+  border-color: black;
+  margin: auto;
+}

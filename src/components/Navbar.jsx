@@ -1,59 +1,39 @@
 import React from "react";
 import "../styles/NavBarStyles.css";
+import { Link } from "react-router-dom";
 
-export default function Navbar(props) {
+export default function Navbar({ about, footer }) {
   return (
     <>
       <div className="container-fluid ">
-        {/* <!-- Navbar --> */}
-        <nav class="navbar navbar-expand-lg navbar-light transparent-navbar">
-          {/* <!-- Container wrapper --> */}
-          <div class="container-fluid">
-            {/* <!-- Toggle button --> */}
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-mdb-toggle="collapse"
-              data-mdb-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <i class="fas fa-bars"></i>
-            </button>
-
-            {/* <!-- Collapsible wrapper --> */}
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              {/* <!-- Navbar brand --> */}
-              <a class="navbar-brand mt-2 mt-lg-0" href="#">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-                  height="25"
-                  alt="MDB Logo"
-                  loading="lazy"
-                />
-              </a>
-              {/* <!-- Left links --> */}
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    Admin
-                  </a>
+        <nav class="nav">
+          <div class="container">
+            <div class="logo">
+              <a href="#">Your Logo</a>
+            </div>
+            <div id="mainListDiv" class="main_list">
+              <ul class="navlinks">
+                <li>
+                  <a href={about}>About</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link " href="#">
-                    Logistic Co-Ordinater
-                  </a>
+                <li>
+                  <a href="#">Portfolio</a>
+                </li>
+                <li>
+                  <a href="#">Services</a>
+                </li>
+                <li>
+                  <a href={footer}>Contact</a>
                 </li>
               </ul>
-              {/* <!-- Left links --> */}
             </div>
-            {/* <!-- Collapsible wrapper --> */}
+            <span class="navTrigger">
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
           </div>
-          {/* <!-- Container wrapper --> */}
         </nav>
-        {/* <!-- Navbar --> */}
-        {/* <!-- Navbar --> */}
       </div>
     </>
   );

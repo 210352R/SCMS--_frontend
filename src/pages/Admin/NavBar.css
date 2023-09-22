@@ -1,0 +1,10 @@
+.link-no-decoration {
+  text-decoration: none;
+  color: rgb(89, 89, 90);
+  /* Remove underlines and default link styles */
+  /* Use the default text color of the parent element */
+  /* You can add more styles as needed */
+}
+.link-no-decoration:hover {
+  color: rgb(89, 89, 90);
+}
