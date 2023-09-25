@@ -40,6 +40,7 @@ function App() {
           path="/coordinaterRegister"
           element={<CoordinaterRegistrationForm />}
         />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/adminboard" element={<AddminDashboard />} />
       </Routes>
     </Router>

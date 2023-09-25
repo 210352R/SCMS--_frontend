@@ -70,17 +70,19 @@ export default function Dashboard() {
               href="/"
               className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
             >
-              <span className="fs-4 d-none d-sm-inline center">Dashboard</span>
+              <span className="fs-3 font-weight-bold align-self-center d-none d-sm-inline center">
+                Dashboard
+              </span>
             </a>
 
             {/* Sidebar Navigation */}
             <ul
-              className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+              className=" nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
               id="menu"
             >
               {/* Add your menu items here */}
               {/* Example menu item */}
-              <li className="nav-item">
+              <li className="nav-item mt-3 mb-3">
                 <a href="#" className="nav-link align-middle px-0 d-flex">
                   <FontAwesomeIcon
                     icon={faHome}
@@ -90,7 +92,7 @@ export default function Dashboard() {
                   <span className="ms-1 d-none d-sm-inline p-1">Home</span>
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item mt-3 mb-3">
                 <a href="#" className="nav-link align-middle px-0 d-flex">
                   <FontAwesomeIcon
                     icon={faShoppingCart}
@@ -100,7 +102,7 @@ export default function Dashboard() {
                   <span className="ms-1 d-none d-sm-inline p-1">Add Order</span>
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item mt-3 mb-3">
                 <a href="#" className="nav-link align-middle px-0 d-flex  ">
                   <FontAwesomeIcon
                     icon={faList}
@@ -112,7 +114,7 @@ export default function Dashboard() {
                   </span>
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item mt-3 mb-3">
                 <a
                   href="#kjhkjhh"
                   className="nav-link align-middle px-0 d-flex"

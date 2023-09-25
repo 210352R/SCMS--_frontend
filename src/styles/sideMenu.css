@@ -22,12 +22,18 @@
   color: #fff; /* Text color */
   margin-bottom: 20px; /* Add space below "Dashboard" text */
 }
-
+.nav-pills {
+  list-style: none;
+  align-items: center;
+}
+.nav-pills li {
+}
 /* Style for sidebar links */
 .nav-link {
   color: #fff; /* Text color */
   font-size: 22px; /* Custom font size */
-  margin-bottom: 8px; /* Add space between links */
+  padding: 15px;
+  margin-bottom: 12px; /* Add space between links */
   transition: color 0.3s; /* Smooth color transition on hover */
 }
 

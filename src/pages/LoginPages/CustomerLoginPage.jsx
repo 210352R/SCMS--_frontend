@@ -22,7 +22,7 @@ export default function CustomerLoginPage() {
         console.log(res);
         if (res.data.sucess) {
           localStorage.setItem("token", res.data.token);
-          navigate("/customerRegister");
+          navigate("/dashboard");
         }
       })
       .catch((err) => {
