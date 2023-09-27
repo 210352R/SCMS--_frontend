@@ -15,11 +15,11 @@ import { Box, Switch, useColorMode } from "theme-ui";
 import Home from "./pages/home";
 import Calender from "./components/Calender";
 
-import Dashboard from "./pages/CustomerSide/Dashboard";
+import Dashboard from "./pages/CustomerSide/CustomerDashboard";
+import CoordinaterDashboard from "./pages/Coordinater/CoDashBoard";
 import ScriptTag from "react-script-tag";
 import AddminDashboard from "./pages/Admin/AddminDashboard";
 import PieChartContainer from "./components/PieChartContainer";
-import CoordinaterDashboard from "./pages/Coordinater/CoDashBoard";
 import OrderCard from "./components/cards/OrderCard";
 import Test from "./pages/Test";
 import HomeCardsContainer from "./components/cards/HomeCardsContainer";
@@ -40,8 +40,9 @@ function App() {
           path="/coordinaterRegister"
           element={<CoordinaterRegistrationForm />}
         />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/:id" element={<Dashboard />} />
         <Route path="/adminboard" element={<AddminDashboard />} />
+        <Route path="/codinaterboard" element={<CoordinaterDashboard />} />
       </Routes>
     </Router>
     // <>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/sideMenu.css"; // Import the external CSS file
 import "../../styles/CustomerDashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,9 +9,41 @@ import {
   faList,
   faComment,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "theme-ui";
+// import { Link } from "theme-ui";
 
-export default function Dashboard() {
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+
+const token = localStorage.getItem("token");
+
+// Create an Axios instance with custom headers
+const axiosInstance = axios.create({
+  headers: {
+    Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+  },
+});
+
+export default function CustomerDashboard() {
+  // Get customer id and fetch details ---
+  const { id } = useParams();
+  const [customer, setCustomer] = useState([{}]);
+
+  useEffect(() => {
+    console.log(id);
+    axiosInstance
+      .get(`http://localhost:8000/customer/get/${id}`)
+      .then((res) => {
+        console.log("ffjgfmgfmfgm", res.data);
+        setCustomer(res.data.customer);
+        console.log(res.data.customer);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  console.log("customer : ", customer);
+
   return (
     <div>
       <div className="row flex-nowrap">
@@ -33,7 +65,9 @@ export default function Dashboard() {
                   height="30"
                   className="rounded-circle"
                 />
-                <span className="d-none d-sm-inline mx-1">Customer</span>
+                <span className="d-none d-sm-inline ms-2 px-2">
+                  {customer[0].first_name + " " + customer[0].last_name}
+                </span>
               </a>
               <ul
                 className="dropdown-menu dropdown-menu-dark text-small shadow"

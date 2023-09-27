@@ -1,14 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import "../../styles/CustomerLogin.css";
 import axios from "axios";
 
+const token = localStorage.getItem("token");
+// Create an Axios instance with custom headers
+const axiosInstance = axios.create({
+  headers: {
+    Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+  },
+});
+
 export default function CustomerLoginPage() {
   const navigate = useNavigate();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+
+  console.log("Storage Token : ", localStorage.getItem("token"));
+
+  useEffect(() => {
+    console.log("Storage Token : ", localStorage.getItem("token"));
+    axiosInstance
+      .get("http://localhost:8000/login/customer")
+      .then((res) => {
+        console.log("ffjgfmgfmfgm", res.data);
+        console.log(res.data.customer);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // Get customer id
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +47,9 @@ export default function CustomerLoginPage() {
         console.log(res);
         if (res.data.sucess) {
           localStorage.setItem("token", res.data.token);
-          navigate("/dashboard");
+          navigate(`/dashboard/${username}`);
+        } else {
+          alert(res.data.message);
         }
       })
       .catch((err) => {
