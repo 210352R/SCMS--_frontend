@@ -24,12 +24,13 @@ import OrderCard from "./components/cards/OrderCard";
 import Test from "./pages/Test";
 import HomeCardsContainer from "./components/cards/HomeCardsContainer";
 import Footer from "./components/HomeFooter/Footer";
+import ImageUpload from "./components/ImageUpload";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<ImageUpload />} />
         <Route path="/customerLogin" element={<CustomerLoginPage />} />
         <Route
           path="/customerRegister"

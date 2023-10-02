@@ -9,6 +9,9 @@ import {
   faList,
   faComment,
 } from "@fortawesome/free-solid-svg-icons";
+
+import { useNavigate } from "react-router-dom";
+
 // import { Link } from "theme-ui";
 
 import { Link, useParams } from "react-router-dom";
@@ -27,6 +30,7 @@ export default function CustomerDashboard() {
   // Get customer id and fetch details ---
   const { id } = useParams();
   const [customer, setCustomer] = useState([{}]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(id);
@@ -41,6 +45,12 @@ export default function CustomerDashboard() {
         console.log(err);
       });
   }, []);
+
+  const signOut = () => {
+    localStorage.removeItem("token");
+    console.log("logged out");
+    navigate("/customerLogin");
+  };
 
   console.log("customer : ", customer);
 
@@ -92,9 +102,9 @@ export default function CustomerDashboard() {
                   <hr className="dropdown-divider" />
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <button className="dropdown-item" onClick={signOut}>
                     Sign out
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -174,7 +184,7 @@ export default function CustomerDashboard() {
               <div className="col-lg-6">
                 <button className="custom-btn btn btn-success">
                   <Link
-                    to="/add"
+                    to="/ad"
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     Add Order

@@ -7,31 +7,30 @@ import axios from "axios";
 
 const token = localStorage.getItem("token");
 // Create an Axios instance with custom headers
-const axiosInstance = axios.create({
-  headers: {
-    Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
-  },
-});
 
 export default function CustomerLoginPage() {
-  const navigate = useNavigate();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const navigate = useNavigate();
 
-  console.log("Storage Token : ", localStorage.getItem("token"));
+  // console.log("Storage Token : ", localStorage.getItem("token"));
+  // console.log("Username password ", username, password);
 
-  useEffect(() => {
-    console.log("Storage Token : ", localStorage.getItem("token"));
-    axiosInstance
-      .get("http://localhost:8000/login/customer")
-      .then((res) => {
-        console.log("ffjgfmgfmfgm", res.data);
-        console.log(res.data.customer);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   console.log("Storage Token : ", localStorage.getItem("token"));
+  //   axiosInstance
+  //     .get("http://localhost:8000/login/customers/authenticate")
+  //     .then((res) => {
+  //       if (res.data.success) {
+  //         console.log("Decoded Token : ", res.data.token);
+  //         let username = res.data.token.user;
+  //         navigate(`/dashboard/${username}`);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   // Get customer id
 
