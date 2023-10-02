@@ -19,7 +19,7 @@ export default function ImageUpload() {
     //formData.append("fileName", fileName);
     try {
       const res = await axios.put(
-        "http://localhost:8000/customer/upload",
+        `http://localhost:8000/customer/upload/${"Cust017"}`,
         formData
       );
       console.log(res.data);
