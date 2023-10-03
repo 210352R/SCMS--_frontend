@@ -30,7 +30,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<ImageUpload />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/customerLogin" element={<CustomerLoginPage />} />
         <Route
           path="/customerRegister"

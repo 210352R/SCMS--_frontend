@@ -56,6 +56,14 @@ export default function CustomerLoginPage() {
       });
   };
 
+  const handleKeyPress = (event) => {
+    // Check if the pressed key is Enter (key code 13)
+    if (event.key === "Enter") {
+      // Trigger the button's click event
+      handleSubmit(event);
+    }
+  };
+
   return (
     <div className="all-in-one">
       <div className="overlay"></div>
@@ -92,6 +100,7 @@ export default function CustomerLoginPage() {
                         id="typePasswordX"
                         placeholder="Password"
                         class="form-control form-control-lg"
+                        onKeyPress={handleKeyPress}
                         onChange={(e) => {
                           setPassword(e.target.value);
                         }}
@@ -126,7 +135,10 @@ export default function CustomerLoginPage() {
                   <div>
                     <p class="mb-1">
                       Don't have an account? &nbsp;{"   "}
-                      <Link to="#" class=" fw-bold register-link ">
+                      <Link
+                        to="/customerRegister"
+                        class=" fw-bold register-link "
+                      >
                         Sign Up
                       </Link>
                     </p>

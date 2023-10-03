@@ -5,17 +5,42 @@ import * as Yup from "yup";
 import "../styles/CustomerRegisterFormStyle.css";
 import axios from "axios";
 
-const token = localStorage.getItem("token");
+// const token = localStorage.getItem("token");
 
-// Create an Axios instance with custom headers
-const axiosInstance = axios.create({
-  headers: {
-    Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
-  },
-});
+// // Create an Axios instance with custom headers
+// const axiosInstance = axios.create({
+//   headers: {
+//     Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+//   },
+// });
 
 export default function CustomerRegistrationForm() {
+  const [file, setFile] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleFile = (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+    //setFileName(e.target.files[0].name);
+  };
+  const uploadFile = async (id) => {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    console.log("Form Data : ", formData);
+    //formData.append("fileName", fileName);
+    try {
+      const res = await axios.put(
+        `http://localhost:8000/customer/upload/${id}`,
+        formData
+      );
+      console.log(res.data);
+      alert("Image Added successfull --- ");
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
   const phoneRegExp = /^[0-9]{10}$/; // Define your phone number pattern here
   const formik = useFormik({
     initialValues: {
@@ -60,10 +85,16 @@ export default function CustomerRegistrationForm() {
     onSubmit(values) {
       delete values.confirmpassword;
       console.log(values);
-      axiosInstance
+      axios
         .post("http://localhost:8000/customer/save", values)
         .then((res) => {
           console.log(res.data);
+          uploadFile(values.customer_id)
+            .then((res) => {
+              console.log(res);
+              alert("Customer Added Sucessfully --- ");
+            })
+            .catch((err) => console.log(err));
         })
         .catch((err) => console.log(err));
       //saveDetails(values);
@@ -325,6 +356,10 @@ export default function CustomerRegistrationForm() {
                             Confirm Password
                           </label>
                         </div>
+                        <div class="form-outline mb-4">
+                          <input type="file" onChange={handleFile} />
+                          {/* <button onClick={uploadFile}>submit </button> */}
+                        </div>
 
                         <div class="d-flex justify-content-end pt-3">
                           <button
@@ -344,22 +379,6 @@ export default function CustomerRegistrationForm() {
                           >
                             Submit form
                           </button>
-                          <button
-                            type="button"
-                            class="btn btn-warning btn-lg ms-2"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              axiosInstance
-                                .get("http://localhost:8000/customer/getAll")
-                                .then((response) => {
-                                  // Handle the response
-                                  console.log(response);
-                                })
-                                .catch((error) => {
-                                  // Handle errors
-                                });
-                            }}
-                          ></button>
                         </div>
                       </div>
                     </div>

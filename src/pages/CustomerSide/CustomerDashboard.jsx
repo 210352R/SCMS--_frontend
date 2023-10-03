@@ -18,8 +18,8 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 const token = localStorage.getItem("token");
-
-// Create an Axios instance with custom headers
+console.log("Token : ", token);
+//Create an Axios instance with custom headers
 const axiosInstance = axios.create({
   headers: {
     Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
@@ -30,6 +30,7 @@ export default function CustomerDashboard() {
   // Get customer id and fetch details ---
   const { id } = useParams();
   const [customer, setCustomer] = useState([{}]);
+  const [orderList, setOrderList] = useState([{}]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,14 +38,42 @@ export default function CustomerDashboard() {
     axiosInstance
       .get(`http://localhost:8000/customer/get/${id}`)
       .then((res) => {
-        console.log("ffjgfmgfmfgm", res.data);
-        setCustomer(res.data.customer);
-        console.log(res.data.customer);
+        if (res.data.sucess) {
+          console.log("Added successfull -- ", res.data);
+          setCustomer(res.data.customer);
+          console.log(res.data.customer);
+          axios
+            .get(`http://localhost:8000/order/get/${id}`)
+            .then((res) => {
+              console.log("Running ---- ");
+              console.log("Order ---- ", res.data);
+              if (res.data.sucess) {
+                setOrderList(res.data.orders);
+              }
+            })
+            .catch((err) => {
+              console.log("Error ---- ", err);
+            });
+          console.log("Running ---- ");
+        } else {
+          console.log("Error");
+          console.log(res.data.message);
+          if (
+            (res.data.message === "Access Denied") |
+            (res.data.message === "Prohibidden")
+          ) {
+            console.log("Access Denied 222222");
+            alert("Login First");
+            navigate("/customerLogin");
+          }
+        }
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  console.log("Order ek : ", orderList);
 
   const signOut = () => {
     localStorage.removeItem("token");
@@ -69,7 +98,7 @@ export default function CustomerDashboard() {
                 aria-expanded="false"
               >
                 <img
-                  src="https://github.com/mdo.png"
+                  src={"http://localhost:8000/images/" + customer[0].image}
                   alt="hugenerd"
                   width="30"
                   height="30"
@@ -208,73 +237,27 @@ export default function CustomerDashboard() {
                         <table class="table mb-0">
                           <thead>
                             <tr>
-                              <th scope="col">EMPLOYEES</th>
-                              <th scope="col">POSITION</th>
-                              <th scope="col">CONTACTS</th>
-                              <th scope="col">AGE</th>
-                              <th scope="col">ADDRESS</th>
-                              <th scope="col">SALARY</th>
+                              <th scope="col">OREDR ID</th>
+                              <th scope="col">DATE</th>
+                              <th scope="col">STORE</th>
+                              <th scope="col">ROUTE ID</th>
+                              <th scope="col">STATUS</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th scope="row" className="row_style">
-                                Tiger Nixon
-                              </th>
-                              <td>System Architect</td>
-                              <td>tnixon12@example.com</td>
-                              <td>61</td>
-                              <td>Edinburgh</td>
-                              <td>$320,800</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Sonya Frost</th>
-                              <td>Software Engineer</td>
-                              <td>sfrost34@example.com</td>
-                              <td>23</td>
-                              <td>Edinburgh</td>
-                              <td>$103,600</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Jena Gaines</th>
-                              <td>Office Manager</td>
-                              <td>jgaines75@example.com</td>
-                              <td>30</td>
-                              <td>London</td>
-                              <td>$90,560</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Quinn Flynn</th>
-                              <td>Support Lead</td>
-                              <td>qflyn09@example.com</td>
-                              <td>22</td>
-                              <td>Edinburgh</td>
-                              <td>$342,000</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Charde Marshall</th>
-                              <td>Regional Director</td>
-                              <td>cmarshall28@example.com</td>
-                              <td>36</td>
-                              <td>San Francisco</td>
-                              <td>$470,600</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Haley Kennedy</th>
-                              <td>Senior Marketing Designer</td>
-                              <td>hkennedy63@example.com</td>
-                              <td>43</td>
-                              <td>London</td>
-                              <td>$313,500</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">Tatyana Fitzpatrick</th>
-                              <td>Regional Director</td>
-                              <td>tfitzpatrick00@example.com</td>
-                              <td>19</td>
-                              <td>Warsaw</td>
-                              <td>$385,750</td>
-                            </tr>
+                            {orderList?.map((order) => {
+                              return (
+                                <tr>
+                                  <th scope="row" className="row_style">
+                                    {order?.order_id}
+                                  </th>
+                                  <td>{order?.date}</td>
+                                  <td>{order?.store_id}</td>
+                                  <td>{order?.route_id}</td>
+                                  <td>{order?.state}</td>
+                                </tr>
+                              );
+                            })}
                           </tbody>
                         </table>
                       </div>
@@ -284,6 +267,7 @@ export default function CustomerDashboard() {
               </div>
             </div>
           </section>
+
           <div
             className="typeWriting"
             style={{
