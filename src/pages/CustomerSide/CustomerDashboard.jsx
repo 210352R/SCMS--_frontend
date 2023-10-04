@@ -3,6 +3,7 @@ import "../../styles/sideMenu.css"; // Import the external CSS file
 import "../../styles/CustomerDashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Typewriter from "typewriter-effect";
+
 import {
   faHome,
   faShoppingCart,
@@ -249,7 +250,11 @@ export default function CustomerDashboard() {
                               return (
                                 <tr>
                                   <th scope="row" className="row_style">
-                                    {order?.order_id}
+                                    <Link
+                                      to={`/custorderdetails/${order?.order_id}`}
+                                    >
+                                      {order?.order_id}
+                                    </Link>
                                   </th>
                                   <td>{order?.date}</td>
                                   <td>{order?.store_id}</td>

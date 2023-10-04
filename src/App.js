@@ -25,6 +25,7 @@ import Test from "./pages/Test";
 import HomeCardsContainer from "./components/cards/HomeCardsContainer";
 import Footer from "./components/HomeFooter/Footer";
 import ImageUpload from "./components/ImageUpload";
+import OrderDetailsPageCust from "./pages/CustomerSide/OrderDetailsPageCust";
 
 function App() {
   return (
@@ -44,6 +45,10 @@ function App() {
         <Route path="/dashboard/:id" element={<Dashboard />} />
         <Route path="/adminboard" element={<AddminDashboard />} />
         <Route path="/codinaterboard" element={<CoordinaterDashboard />} />
+        <Route
+          path="/custorderdetails/:id"
+          element={<OrderDetailsPageCust />}
+        />
       </Routes>
     </Router>
     // <>
