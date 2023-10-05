@@ -1,0 +1,56 @@
+/* Add a word art style to the h1 tag */
+.word-art {
+  font-size: 3rem;
+  color: #fff; /* Text color */
+  text-transform: uppercase;
+  font-family: "Arial", sans-serif; /* You can change the font-family */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for a 3D effect */
+}
+
+/* Make the table semi-transparent */
+.table-semi-transparent {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.7
+  ); /* Adjust the alpha (4th value) for transparency */
+  border-radius: 15px; /* Rounded corners for the table */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Box shadow for a soft effect */
+}
+
+/* Optional: Style the table rows */
+.row_style {
+  font-weight: bold;
+  color: #007bff; /* Blue color for links */
+}
+
+.row_style a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* CSS for the luminous running border */
+@keyframes luminous-border {
+  0% {
+    box-shadow: 0 0 25px rgba(241, 241, 242, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(68, 159, 251, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(240, 247, 255, 0.6);
+  }
+}
+
+/* Apply the animation to the table when it's hovered */
+.table-semi-transparent:hover {
+  animation: luminous-border 2s infinite;
+}
+
+/* Add background color to table headings */
+.table-th {
+  background-color: #007bff; /* Change this color to your desired background color */
+  color: white; /* Set the text color to contrast with the background */
+  padding: 10px; /* Adjust padding as needed */
+}

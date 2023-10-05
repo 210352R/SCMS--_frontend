@@ -1,0 +1,5 @@
+.clickable {
+  cursor: pointer;
+  font-style: italic;
+  font-weight: 600;
+}

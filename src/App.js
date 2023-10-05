@@ -27,6 +27,8 @@ import Footer from "./components/HomeFooter/Footer";
 import ImageUpload from "./components/ImageUpload";
 import OrderDetailsPageCust from "./pages/CustomerSide/OrderDetailsPageCust";
 import AdminFirstPage from "./pages/Admin/AdminFirstPage";
+import AdminAllOrder from "./pages/Admin/AdminAllOrder";
+import AdminCustomerList from "./pages/Admin/AdminCustomerList";
 
 function App() {
   return (
@@ -50,6 +52,8 @@ function App() {
           path="/custorderdetails/:id"
           element={<OrderDetailsPageCust />}
         />
+        <Route path="/adminorderdetails/:id" element={<AdminAllOrder />} />
+        <Route path="/admincustomerlist/:id" element={<AdminCustomerList />} />
       </Routes>
     </Router>
     // <>
