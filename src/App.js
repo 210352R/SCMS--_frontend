@@ -26,6 +26,7 @@ import HomeCardsContainer from "./components/cards/HomeCardsContainer";
 import Footer from "./components/HomeFooter/Footer";
 import ImageUpload from "./components/ImageUpload";
 import OrderDetailsPageCust from "./pages/CustomerSide/OrderDetailsPageCust";
+import AdminFirstPage from "./pages/Admin/AdminFirstPage";
 
 function App() {
   return (
@@ -43,7 +44,7 @@ function App() {
           element={<CoordinaterRegistrationForm />}
         />
         <Route path="/dashboard/:id" element={<Dashboard />} />
-        <Route path="/adminboard" element={<AddminDashboard />} />
+        <Route path="/adminboard/:id" element={<AdminFirstPage />} />
         <Route path="/codinaterboard" element={<CoordinaterDashboard />} />
         <Route
           path="/custorderdetails/:id"

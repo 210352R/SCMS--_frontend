@@ -21,4 +21,5 @@
   justify-content: center;
   border-color: black;
   margin: auto;
+  overflow: hidden;
 }

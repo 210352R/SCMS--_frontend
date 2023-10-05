@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
+import "../../styles/orderDetailsCust.css";
+
 const token = localStorage.getItem("token");
 console.log("Token : ", token);
 //Create an Axios instance with custom headers
@@ -35,45 +37,59 @@ export default function OrderDetailsPageCust() {
 
   return (
     <div>
-      <div>
-        <div class="card container">
-          <div class="card-header">Order Details </div>
-          <div class="card-body">
-            <h3 class="card-title">{"topic"}</h3>
-            <hr />
-            <div className="row">
-              <div className="col-sm-3 ">
-                {" "}
-                <b>Order Id </b>{" "}
-              </div>
-              <div className="col-sm-9 ">{order?.order_id}</div>
+      <div className=" maincontainer min-vh-100">
+        <div class="card container mt-5">
+          <div cla>
+            <div class="card-header">Order Details </div>
+            <div class="card-body">
+              <h3 class="card-title">{"topic"}</h3>
+              <hr />
+              <div className="row">
+                <div className="col-sm-3 ">
+                  {" "}
+                  <b>Order Id </b>{" "}
+                </div>
+                <div className="col-sm-9 ">{order?.order_id}</div>
 
-              <div className="col-sm-3 ">
-                <b>Post Catagory </b>
-              </div>
-              <div className="col-sm-9">{"postCategory"}</div>
+                <div className="col-sm-3 ">
+                  <b>Date </b>
+                </div>
+                <div className="col-sm-9">{order?.date}</div>
 
-              <div class="table-responsive bg-white">
-                <table class="table mb-0">
-                  <thead>
-                    <tr>
-                      <th scope="col">Product ID</th>
-                      <th scope="col">Quantity</th>
-                      <th scope="col">sent_Quantity</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {productList?.map((product) => {
-                      return (
-                        <tr>
-                          <td>{product?.product_id}</td>
-                          <td>{product?.quantity}</td>
-                          <td>{product?.sent_quantity}</td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+                <div className="col-sm-3 ">
+                  <b>Delivery Address </b>
+                </div>
+                <div className="col-sm-9">{order?.delivery_address}</div>
+
+                <div className="col-sm-3 ">
+                  <b>State </b>
+                </div>
+                <div className="col-sm-9">{order?.state}</div>
+
+                <div class="table-responsive bg-white mt-5">
+                  <table class="table mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col">Product ID</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">sent_Quantity</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {productList?.map((product) => {
+                        return (
+                          <tr>
+                            <td>{product?.product_id}</td>
+                            <td>{product?.name}</td>
+                            <td>{product?.quantity}</td>
+                            <td>{product?.sent_quantity}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

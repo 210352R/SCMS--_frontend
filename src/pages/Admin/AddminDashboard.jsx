@@ -1,5 +1,6 @@
-import * as React from "react";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
@@ -9,20 +10,25 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
+
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 
-import backgroundImage from "../../images/Supply Chain Jobs_ Procurement, Logistics, and Management.jpg";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+
+import Modal from "@mui/material/Modal";
 import Charts from "../../components/Charts";
 
 import "../../styles/AdminDashBoard.css";
+
+import { Link, useParams } from "react-router-dom";
 
 import { mainListItems, secondaryListItems } from "./NavBarList";
 import PieChartContainer from "../../components/PieChartContainer";
@@ -79,29 +85,177 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-// TODO remove, this demo shouldn't need to reset the theme.
+const modelStyle = {
+  width: "800px",
+  height: "800px",
+  marginLeft: "auto",
+  marginRight: "auto",
+  marginTop: "150px",
+};
 
-export default function AddminDashboard() {
-  const [open, setOpen] = React.useState(true);
+// Define the styles for the icon
+const iconStyle = {
+  width: "40px", // Adjust this value to your desired width
+  height: "40px", // Adjust this value to your desired height
+  //border: "2px solid black", // Add a black border
+};
+
+export default function AddminDashboard({ children, id }) {
+  const [Modelopen, setModelOpen] = useState(false);
+  const handleModelOpen = () => setModelOpen(true);
+  const handleModelClose = () => setModelOpen(false);
+  const [open, setOpen] = useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const Menuopen = Boolean(anchorEl);
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const [admin, setAdmin] = useState([{}]);
+
+  useEffect(() => {
+    console.log("ID : ", id);
+
+    axios
+      .get(`http://localhost:8000/admin/get/${id}`)
+      .then((res) => {
+        console.log("Data : ", res.data);
+        if (res.data.sucess) {
+          console.log("Admin Get Success ----");
+          setAdmin(res.data.admin[0]);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  console.log("Admin : ", admin);
   return (
     <div className="overlay">
-      <div></div>
+      {/* model eka  */}
+      <Modal
+        open={Modelopen}
+        onClose={handleModelClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        sx={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+      >
+        <Box style={modelStyle} className="h-auto bg-primary">
+          <section style={{ backgroundColor: "#eee" }}>
+            <div className="container py-5 ">
+              <div className="row">
+                <div className="col-lg-4">
+                  <div className="card mb-4">
+                    <div className="h-auto text-center">
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                        alt="avatar"
+                        className="rounded-circle img-fluid"
+                        style={{ width: "150px" }}
+                      />
+                      <h5 className="my-3">{admin?.user_name}</h5>
+                      <p className="text-muted mb-1">SCMS - Administrater</p>
+                      <p className="text-muted mb-4">
+                        Bay Area, San Francisco, CA
+                      </p>
+                      <div className="d-flex justify-content-center mb-2">
+                        <button type="button" className="btn btn-primary">
+                          Follow
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-outline-primary ms-1"
+                        >
+                          Message
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-8">
+                  <div className="card mb-4">
+                    <div className="card-body">
+                      <div className="row">
+                        <div className="col-sm-3">
+                          <p className="mb-0">Full Name</p>
+                        </div>
+                        <div className="col-sm-9">
+                          <p className="text-muted mb-0">
+                            {admin?.first_name} {admin?.last_name}
+                          </p>
+                        </div>
+                      </div>
+                      <hr />
+                      <div className="row">
+                        <div className="col-sm-3">
+                          <p className="mb-0">Email</p>
+                        </div>
+                        <div className="col-sm-9">
+                          <p className="text-muted mb-0">{admin?.email}</p>
+                        </div>
+                      </div>
+                      <hr />
+                      <div className="row">
+                        <div className="col-sm-3">
+                          <p className="mb-0">Phone</p>
+                        </div>
+                        <div className="col-sm-9">
+                          <p className="text-muted mb-0">
+                            {admin?.phone_number}
+                          </p>
+                        </div>
+                      </div>
+                      <hr />
+                      <div className="row">
+                        <div className="col-sm-3">
+                          <p className="mb-0">Mobile</p>
+                        </div>
+                        <div className="col-sm-9">
+                          <p className="text-muted mb-0">(098) 765-4321</p>
+                        </div>
+                      </div>
+                      <hr />
+                      <div className="row">
+                        <div className="col-sm-3">
+                          <p className="mb-0">Address</p>
+                        </div>
+                        <div className="col-sm-9">
+                          <p className="text-muted mb-0">{admin?.address}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </Box>
+      </Modal>
+
+      {/* Model eka iwarai */}
 
       <Box
         sx={{
           display: "flex",
+
           // Optional, makes the background fixed
+          background: "fixed",
         }}
       >
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute" sx={{}} open={open}>
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
+              backgroundColor: "grey",
             }}
           >
             <IconButton
@@ -130,13 +284,53 @@ export default function AddminDashboard() {
             >
               Admin Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="primary">
-                <NotificationsIcon />
-              </Badge>
+            <IconButton color="inherit" onClick={handleMenuClick}>
+              {/* <NotificationsIcon /> */}
+
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                sx={{
+                  flexGrow: 1,
+                  fontStyle: "italic",
+                  fontWeight: "bold",
+                  fontSize: "20px",
+                  marginRight: "5px",
+                }}
+              >
+                {admin?.user_name}
+              </Typography>
+
+              <AccountBoxIcon style={iconStyle} />
             </IconButton>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={Menuopen}
+              onClose={handleMenuClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+              sx={{
+                position: "absolute",
+              }}
+            >
+              <MenuItem
+                onClick={() => {
+                  handleModelOpen();
+                  handleMenuClose();
+                }}
+              >
+                Profile
+              </MenuItem>
+              <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+              <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+            </Menu>
           </Toolbar>
         </AppBar>
+
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
@@ -165,291 +359,8 @@ export default function AddminDashboard() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3} sx={{ alignItems: "center" }}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 5,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 450,
-                  }}
-                  className="luminous-border container"
-                >
-                  <Charts />
-                  {/* <Chart /> */}
-                  {/* <Charts /> */}
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={10} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    overflow: "hidden",
-                    width: 300,
-                    height: 380,
-                  }}
-                  className="luminous-border container "
-                >
-                  <PieChartContainer />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper
-                  sx={{ p: 2, display: "flex", flexDirection: "column" }}
-                  className="luminous-border my-5"
-                >
-                  {/* <Orders /> */}
-                  <section class="intro my-3">
-                    <div class="bg-image h-100">
-                      <div class="mask d-flex align-items-center h-100">
-                        <div class="container">
-                          <div class="row justify-content-center">
-                            <div class="col-12">
-                              <div class="card">
-                                <div class="card-body">
-                                  <div class="table-responsive">
-                                    <table class="table table-hover mb-0">
-                                      <thead>
-                                        <tr>
-                                          <th scope="col"></th>
-                                          <th scope="col">
-                                            Product Detail Views
-                                          </th>
-                                          <th scope="col">Unique Purchases</th>
-                                          <th scope="col">Quantity</th>
-                                          <th scope="col">Product Revenue</th>
-                                          <th scope="col">Avg. Price</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <th scope="row">Value</th>
-                                          <td>18,492</td>
-                                          <td>228</td>
-                                          <td>350</td>
-                                          <td>$4,787.64</td>
-                                          <td>$13.68</td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">Percentage change</th>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>-48.8%%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>14.0%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>46.4%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>29.6%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>-11.5%</span>
-                                            </span>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">Average</th>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>-17,654</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>28</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>111</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>$1,092.72</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>$-1.78</span>
-                                            </span>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">Buy-to-details</th>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>-48.8%%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>14.0%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>46.4%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>29.6%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>-11.5%</span>
-                                            </span>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">Sales</th>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>-17,654</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>28</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>111</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>$1,092.72</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>$-1.78</span>
-                                            </span>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">Website traffic</th>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>-48.8%%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>14.0%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>46.4%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>29.6%</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>-11.5%</span>
-                                            </span>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <th scope="row">Clickthrough</th>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>-17,654</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>28</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>111</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-success">
-                                              <i class="fas fa-caret-up me-1"></i>
-                                              <span>$1,092.72</span>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span class="text-danger">
-                                              <i class="fas fa-caret-down me-1"></i>
-                                              <span>$-1.78</span>
-                                            </span>
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-                </Paper>
-              </Grid>
-            </Grid>
-          </Container>
+          {/* -------------------------------------------------------------------------------------------------------------------------- */}
+          {children}
         </Box>
       </Box>
     </div>

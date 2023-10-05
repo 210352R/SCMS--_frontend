@@ -65,6 +65,24 @@
   margin-top: 20px;
 }
 
+/* Add this CSS to your stylesheet or component styles */
+/* .btn-primary.transparent-button.hoverable {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary.transparent-button.hoverable:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid white; /* Add a white border */
+/* border-radius: 5px; /* Add rounded corners for a better look */
+/* filter: blur(5px); /* Apply a blur effect to the border */
+/* } */
+
 .navBarWrapper {
   position: absolute;
   top: 0;

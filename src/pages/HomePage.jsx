@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import "../styles/HomePage.css";
 import Navbar from "../components/Navbar";
@@ -8,6 +9,37 @@ import OrderCard from "../components/cards/OrderCard";
 import HomeCards from "../components/cards/HomeCards";
 import HomeCardsContainer from "../components/cards/HomeCardsContainer";
 import Footer from "../components/HomeFooter/Footer";
+
+// Add animations  --
+const placeholderText = [
+  { type: "heading1", text: "Framer Motion" },
+  { type: "heading2", text: "Animating responsive text!" },
+];
+
+const container = {
+  visible: {
+    transition: {
+      staggerChildren: 0.025,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: -20,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      damping: 10,
+      stiffness: 100,
+      duration: 3,
+    },
+  },
+};
 
 export default function HomePage() {
   return (
@@ -23,7 +55,17 @@ export default function HomePage() {
               </div>
               <div className="main">
                 <div style={{ alignSelf: "center" }} className="container">
-                  <h1 className="topic"> Supply Chain Management System </h1>
+                  <motion.div
+                    className="App"
+                    initial="hidden"
+                    animate={"visible"}
+                    variants={container} // Animation properties when component appears
+                  >
+                    <motion.h1 variants={itemVariants} className="topic">
+                      {" "}
+                      Supply Chain Management System{" "}
+                    </motion.h1>
+                  </motion.div>
                   <div
                     style={{
                       alignSelf: "center",
