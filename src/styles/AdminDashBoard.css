@@ -12,6 +12,7 @@ body {
   background-attachment: fixed;
   background-blend-mode: darken;
   background-color: rgba(0, 0, 0, 0.8);
+  flex-direction: row;
 }
 
 /* AdminDashBoard.css */

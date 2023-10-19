@@ -18,14 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
-const token = localStorage.getItem("token");
-console.log("Token : ", token);
-//Create an Axios instance with custom headers
-const axiosInstance = axios.create({
-  headers: {
-    Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
-  },
-});
+import Cookies from "js-cookie";
 
 export default function CustomerDashboard() {
   // Get customer id and fetch details ---
@@ -33,6 +26,17 @@ export default function CustomerDashboard() {
   const [customer, setCustomer] = useState([{}]);
   const [orderList, setOrderList] = useState([{}]);
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+  console.log("Token Ek Mulinma: ", token);
+
+  console.log("Token : ", token);
+  //Create an Axios instance with custom headers
+  const axiosInstance = axios.create({
+    headers: {
+      Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+    },
+  });
 
   useEffect(() => {
     console.log(id);
@@ -64,6 +68,7 @@ export default function CustomerDashboard() {
             (res.data.message === "Prohibidden")
           ) {
             console.log("Access Denied 222222");
+
             alert("Login First");
             navigate("/customerLogin");
           }
@@ -75,11 +80,13 @@ export default function CustomerDashboard() {
   }, []);
 
   console.log("Order ek : ", orderList);
+  console.log("Token Ek : ", token);
 
   const signOut = () => {
     localStorage.removeItem("token");
     console.log("logged out");
     navigate("/customerLogin");
+    console.log("Token Ek ain kalama : ", token);
   };
 
   console.log("customer : ", customer);

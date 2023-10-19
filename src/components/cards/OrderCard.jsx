@@ -2,7 +2,7 @@ import React from "react";
 
 import "./orderCard.css";
 
-export default function OrderCard() {
+export default function OrderCard({ name, city, address }) {
   return (
     <>
       <div class="card allContainer" style={{ width: "18rem" }}>
@@ -12,13 +12,12 @@ export default function OrderCard() {
           alt="..."
         />
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+          <h5 class="card-title">
+            {city} {"- "} {name}
+          </h5>
+          <p class="card-text ">{address}</p>
           <a href="#" class="btn btn-primary">
-            Go somewhere
+            View Store
           </a>
         </div>
       </div>

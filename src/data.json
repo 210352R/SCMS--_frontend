@@ -1,0 +1,160 @@
+{
+    "trains": [
+      {
+        "name": "Express 1",
+        "id": "1",
+        "capacity": 300,
+        "date": "2023-09-20"
+      },
+      {
+        "name": "Local 2",
+        "id": "2",
+        "capacity": 150,
+        "date": "2023-09-21"
+      },
+      {
+        "name": "Cargo 3",
+        "id": "3",
+        "capacity": 500,
+        "date": "2023-09-22"
+      },
+      {
+        "name": "Express 4",
+        "id": "4",
+        "capacity": 350,
+        "date": "2023-09-23"
+      },
+      {
+        "name": "Local 5",
+        "id": "5",
+        "capacity": 200,
+        "date": "2023-09-24"
+      },
+      {
+        "name": "Cargo 6",
+        "id": "6",
+        "capacity": 600,
+        "date": "2023-09-25"
+      },
+      {
+        "name": "Express 7",
+        "id": "7",
+        "capacity": 400,
+        "date": "2023-09-26"
+      },
+      {
+        "name": "Local 8",
+        "id": "8",
+        "capacity": 250,
+        "date": "2023-09-27"
+      },
+      {
+        "name": "Cargo 9",
+        "id": "9",
+        "capacity": 700,
+        "date": "2023-09-28"
+      },
+      {
+        "name": "Express 10",
+        "id": "10",
+        "capacity": 450,
+        "date": "2023-09-29"
+      }
+    ],
+    "orders": [
+      {
+        "order_id": "12345",
+        "delivery_address": "123 Main Street",
+        "size": 50,
+        "train": ""
+      },
+      {
+        "order_id": "67890",
+        "delivery_address": "456 Elm Street",
+        "size": 100,
+        "train": ""
+      },
+      {
+        "order_id": "54321",
+        "delivery_address": "789 Oak Street",
+        "size": 20,
+        "train": ""
+      },
+      {
+        "order_id": "11111",
+        "delivery_address": "101 Maple Avenue",
+        "size": 75,
+        "train": ""
+      },
+      {
+        "order_id": "22222",
+        "delivery_address": "202 Pine Road",
+        "size": 30,
+        "train": ""
+      },
+      {
+        "order_id": "33333",
+        "delivery_address": "303 Cedar Lane",
+        "size": 55,
+        "train": ""
+      },
+      {
+        "order_id": "44444",
+        "delivery_address": "404 Birch Court",
+        "size": 90,
+        "train": ""
+      },
+      {
+        "order_id": "55555",
+        "delivery_address": "505 Redwood Drive",
+        "size": 40,
+        "train": ""
+      },
+      {
+        "order_id": "66666",
+        "delivery_address": "606 Spruce Street",
+        "size": 85,
+        "train": ""
+      },
+      {
+        "order_id": "77777",
+        "delivery_address": "707 Willow Way",
+        "size": 65,
+        "train": ""
+      }
+    ],
+    "admins": [
+      {
+        "username": "admin1",
+        "password": "adminpassword1"
+      },
+      {
+        "username": "admin2",
+        "password": "adminpassword2"
+      }
+    ],
+    "coordinators": [
+      {
+        "username": "coordinator1",
+        "password": "coordinatorpassword1"
+      },
+      {
+        "username": "coordinator2",
+        "password": "coordinatorpassword2"
+      }
+    ],
+    "customers": [
+      {
+        "username": "user1",
+        "password": "password1"
+      },
+      {
+        "username": "user2",
+        "password": "password2"
+      },
+      {
+        "username": "user3",
+        "password": "password3"
+      }
+    ]
+  }

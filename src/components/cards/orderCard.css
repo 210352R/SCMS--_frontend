@@ -1,8 +1,7 @@
 .allContainer {
-  margin: 5px;
+  margin: 10px;
   padding: 2px;
   border-radius: 20px;
-  overflow: hidden;
 }
 .img-dec {
   border-radius: 20px;

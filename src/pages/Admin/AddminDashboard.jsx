@@ -39,6 +39,8 @@ import Charts from "../../components/Charts";
 
 import "../../styles/AdminDashBoard.css";
 
+import { useNavigate } from "react-router-dom";
+
 import { Link, useParams } from "react-router-dom";
 
 import { mainListItems, secondaryListItems } from "./NavBarList";
@@ -111,7 +113,10 @@ const iconStyle = {
   //border: "2px solid black", // Add a black border
 };
 
+// functionalaties ----------------------
+
 export default function AddminDashboard({ children, id }) {
+  const navigate = useNavigate();
   const [Modelopen, setModelOpen] = useState(false);
   const handleModelOpen = () => setModelOpen(true);
   const handleModelClose = () => setModelOpen(false);
@@ -130,6 +135,13 @@ export default function AddminDashboard({ children, id }) {
   };
 
   const [admin, setAdmin] = useState([{}]);
+
+  // functions -------------
+  const logOut = () => {
+    localStorage.removeItem("token");
+    console.log("logged out");
+    navigate("/adminLogin");
+  };
 
   useEffect(() => {
     console.log("ID : ", id);
@@ -337,7 +349,7 @@ export default function AddminDashboard({ children, id }) {
                 Profile
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-              <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+              <MenuItem onClick={logOut}>Logout</MenuItem>
             </Menu>
           </Toolbar>
         </AppBar>
@@ -380,6 +392,7 @@ export default function AddminDashboard({ children, id }) {
                   <ListItemText primary="Orders" />
                 </ListItemButton>
               </Link>
+
               {/* /admincustomerlist/:id */}
               <Link
                 to={`/admincustomerlist/${id}`}
@@ -399,12 +412,15 @@ export default function AddminDashboard({ children, id }) {
                 </ListItemIcon>
                 <ListItemText primary="Reports" />
               </ListItemButton>
-              <ListItemButton>
-                <ListItemIcon>
-                  <LayersIcon />
-                </ListItemIcon>
-                <ListItemText primary="Stores" />
-              </ListItemButton>
+
+              <Link to={`/adminstorelist/${id}`} className="link-no-decoration">
+                <ListItemButton>
+                  <ListItemIcon>
+                    <LayersIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Stores" />
+                </ListItemButton>
+              </Link>
             </React.Fragment>
 
             <Divider sx={{ my: 1 }} />

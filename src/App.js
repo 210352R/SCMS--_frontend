@@ -29,13 +29,23 @@ import OrderDetailsPageCust from "./pages/CustomerSide/OrderDetailsPageCust";
 import AdminFirstPage from "./pages/Admin/AdminFirstPage";
 import AdminAllOrder from "./pages/Admin/AdminAllOrder";
 import AdminCustomerList from "./pages/Admin/AdminCustomerList";
+import AdminStoreDetail from "./pages/Admin/AdminStoreDetail";
+import AdminLogin from "./pages/Admin/AdminLogin";
+import CoOrdinaterLogin from "./pages/Coordinater/CoOrdinaterLogin";
+import TrainCoordinaterBoard from "./pages/Coordinater/TrainCoordinaterBoard";
+import TCoDash from "./pages/Coordinater/TCoDash";
+import TCAddOrder from "./pages/Coordinater/TCAddOrder";
+import AddOrderPage from "./pages/CustomerSide/AddOrderPage";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<TCoDash />} />
+        {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/customerLogin" element={<CustomerLoginPage />} />
+        <Route path="/adminLogin" element={<AdminLogin />} />
+        <Route path="/coordinaterLogin" element={<CoOrdinaterLogin />} />
         <Route
           path="/customerRegister"
           element={<CustomerRegistrationForm />}
@@ -47,13 +57,29 @@ function App() {
         />
         <Route path="/dashboard/:id" element={<Dashboard />} />
         <Route path="/adminboard/:id" element={<AdminFirstPage />} />
-        <Route path="/codinaterboard" element={<CoordinaterDashboard />} />
+        <Route
+          path="/traincodinaterboard/:id"
+          element={<TrainCoordinaterBoard />}
+        />
+        <Route
+          path="/truckcodinaterboard/:id"
+          element={<CoordinaterDashboard />}
+        />
         <Route
           path="/custorderdetails/:id"
           element={<OrderDetailsPageCust />}
         />
         <Route path="/adminorderdetails/:id" element={<AdminAllOrder />} />
         <Route path="/admincustomerlist/:id" element={<AdminCustomerList />} />
+        <Route path="/adminstorelist/:id" element={<AdminStoreDetail />} />
+        <Route path="/customerOrderlist/:id" element={<AdminStoreDetail />} />
+
+        <Route
+          path="/TCAddorder/:id/:storeId/:capacity"
+          element={<TCAddOrder />}
+        ></Route>
+
+        <Route path="/addOrder" element={<AddOrderPage />} />
       </Routes>
     </Router>
     // <>

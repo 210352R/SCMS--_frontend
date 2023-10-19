@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import jwtDecode from "jwt-decode";
+import { Button, Modal } from "react-bootstrap";
 import "../../styles/CustomerLogin.css";
 import axios from "axios";
 
@@ -11,26 +12,36 @@ const token = localStorage.getItem("token");
 export default function CustomerLoginPage() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  // console.log("Storage Token : ", localStorage.getItem("token"));
-  // console.log("Username password ", username, password);
+  const handleClose = () => setShow(false);
+  console.log("Storage Token : ", localStorage.getItem("token"));
 
-  // useEffect(() => {
-  //   console.log("Storage Token : ", localStorage.getItem("token"));
-  //   axiosInstance
-  //     .get("http://localhost:8000/login/customers/authenticate")
-  //     .then((res) => {
-  //       if (res.data.success) {
-  //         console.log("Decoded Token : ", res.data.token);
-  //         let username = res.data.token.user;
-  //         navigate(`/dashboard/${username}`);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  //Create an Axios instance with custom headers
+  const axiosInstance = axios.create({
+    headers: {
+      Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+    },
+  });
+
+  useEffect(() => {
+    console.log("Storage Token : ", localStorage.getItem("token"));
+    axiosInstance
+      .get("http://localhost:8000/login/customers/authenticate")
+      .then((res) => {
+        if (res.data.success) {
+          const decodedToken = jwtDecode(token);
+          console.log(decodedToken.user);
+          setUsername(decodedToken.user);
+          navigate(`/dashboard/${decodedToken.user}`);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 
   // Get customer id
 
@@ -40,12 +51,15 @@ export default function CustomerLoginPage() {
       username: username,
       password: password,
     };
+
     axios
       .post("http://localhost:8000/login/customer", body)
       .then((res) => {
         console.log(res);
         if (res.data.sucess) {
           localStorage.setItem("token", res.data.token);
+          setMessage(res.data.message);
+          setShow(true);
           navigate(`/dashboard/${username}`);
         } else {
           alert(res.data.message);
@@ -149,6 +163,21 @@ export default function CustomerLoginPage() {
           </div>
         </div>
       </section>
+      {show && (
+        <>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Login Alert </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{message}</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
+      )}
     </div>
   );
 }

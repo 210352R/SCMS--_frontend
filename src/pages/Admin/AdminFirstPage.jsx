@@ -53,6 +53,7 @@ export default function AdminFirstPage() {
                 sx={{
                   p: 5,
                   display: "flex",
+
                   flexDirection: "column",
                   height: 450,
                 }}
@@ -69,6 +70,7 @@ export default function AdminFirstPage() {
                 sx={{
                   p: 2,
                   display: "flex",
+
                   flexDirection: "column",
                   overflow: "hidden",
                   width: 380,

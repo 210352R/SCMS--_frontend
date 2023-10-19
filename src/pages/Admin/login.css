@@ -1,0 +1,39 @@
+.login-form {
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  width: 300px;
+}
+
+.login-input {
+  border-color: rgb(167, 162, 162);
+  background-color: black;
+  color: white;
+  padding: 3px;
+  width: 70%;
+}
+.login-label {
+  font-weight: 200;
+}
+
+.usrname {
+  margin-bottom: 8px;
+}
+.login-btn {
+  background-color: blue;
+  margin-top: 20px;
+  padding: 8px;
+  padding-top: 5px;
+}
+
+.login-btn:hover {
+  opacity: 100%;
+  background-color: rgb(8, 8, 222);
+}
+
+.login-form h3 {
+  margin-top: 0px;
+}
