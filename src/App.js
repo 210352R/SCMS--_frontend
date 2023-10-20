@@ -41,8 +41,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<TCoDash />} />
-        {/* <Route path="/" element={<HomePage />} /> */}
+        <Route path="/" element={<HomePage />} />
         <Route path="/customerLogin" element={<CustomerLoginPage />} />
         <Route path="/adminLogin" element={<AdminLogin />} />
         <Route path="/coordinaterLogin" element={<CoOrdinaterLogin />} />
@@ -57,10 +56,7 @@ function App() {
         />
         <Route path="/dashboard/:id" element={<Dashboard />} />
         <Route path="/adminboard/:id" element={<AdminFirstPage />} />
-        <Route
-          path="/traincodinaterboard/:id"
-          element={<TrainCoordinaterBoard />}
-        />
+        <Route path="/traincodinaterboard/:id" element={<TCoDash />} />
         <Route
           path="/truckcodinaterboard/:id"
           element={<CoordinaterDashboard />}
@@ -79,7 +75,8 @@ function App() {
           element={<TCAddOrder />}
         ></Route>
 
-        <Route path="/addOrder" element={<AddOrderPage />} />
+        <Route path="/addOrder/:id" element={<AddOrderPage />} />
+        {/* <Route path="/trainCoordinaterDash" element={<TCoDash />} /> */}
       </Routes>
     </Router>
     // <>

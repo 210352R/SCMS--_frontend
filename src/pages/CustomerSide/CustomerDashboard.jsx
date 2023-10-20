@@ -174,14 +174,19 @@ export default function CustomerDashboard() {
                 </a>
               </li>
               <li className="nav-item mt-3 mb-3">
-                <a href="#" className="nav-link align-middle px-0 d-flex">
+                <Link
+                  to={`/addOrder/${id}`}
+                  className="nav-link align-middle px-0 d-flex"
+                >
                   <FontAwesomeIcon
                     icon={faShoppingCart}
                     className="custom-icon fs-4 mx-1"
                     style={{ color: "white", fontSize: "15px" }}
                   />
-                  <span className="ms-1 d-none d-sm-inline p-1">Add Order</span>
-                </a>
+                  <span className="ms-1 d-none d-sm-inline p-1">
+                    Add Order{" "}
+                  </span>
+                </Link>
               </li>
               <li className="nav-item mt-3 mb-3">
                 <a href="#" className="nav-link align-middle px-0 d-flex  ">
@@ -221,7 +226,7 @@ export default function CustomerDashboard() {
               <div className="col-lg-6">
                 <button className="custom-btn btn btn-success">
                   <Link
-                    to="/ad"
+                    to={`/addOrder/${id}`}
                     style={{ textDecoration: "none", color: "white" }}
                   >
                     Add Order

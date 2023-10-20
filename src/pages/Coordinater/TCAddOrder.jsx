@@ -11,14 +11,24 @@ import "react-datepicker/dist/react-datepicker.css"; // Import the CSS
 import { Link, useParams } from "react-router-dom";
 
 import axios from "axios";
+import TaskList from "../../components/TaskList";
 
 export default function TCAddOrder() {
   const { id, storeId, capacity } = useParams();
+  const [trainTrip, setTrainTrip] = useState(null);
+  const [trainToken, setTrainToken] = useState(null);
+  const [trainTripId, setTrainTripId] = useState(null);
 
+  const [totCapacity, setTotCapacity] = useState(0);
+
+  const [orderDetails, setOrderDetails] = useState({});
+  const [productDetails, setProductDetails] = useState([{}]);
   const [tripChoose, setTripChoose] = useState(false);
   const [addNew, setAddNew] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+
+  const [tokenArray, setTokenArray] = useState([]);
 
   const [selectedTrain, setSelectedTrain] = useState(null);
 
@@ -41,6 +51,24 @@ export default function TCAddOrder() {
   }, []);
 
   // useEffect Hook ---
+
+  // get Order Details ------------------
+  useEffect(() => {
+    if (true) {
+      axios
+        .get(`http://localhost:8000/order/getItem/${id}`)
+        .then((res) => {
+          if (res.data.sucess) {
+            setOrderDetails(res.data.order);
+            setProductDetails(res.data.products);
+          }
+        })
+        .catch((err) => {
+          console.log("Eroor : ", err);
+        });
+    }
+  }, []);
+
   useEffect(() => {
     if (selectedDate && selectedTrain && selectedTime) {
       setReadyToSubmit(true);
@@ -81,9 +109,8 @@ export default function TCAddOrder() {
     console.log("Running ---- ");
   }, [selectedDate, selectedTrain, selectedTime, setTripChoose]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (addNew) {
-      console.log("Meka athulata aawwaaaaaa");
       const trainTrip = {
         date: selectedDate,
         train_id: selectedTrain,
@@ -92,16 +119,78 @@ export default function TCAddOrder() {
       console.log("Train Trip ----------------- /*/*/*/*/  : ", trainTrip);
       setAddNew(false);
 
-      const result = axios.post(
+      const result = await axios.post(
         "http://localhost:8000/traintrip/addTrainTrip",
         trainTrip
       );
       console.log("Result");
+      const res = await axios.post(
+        "http://localhost:8000/traintrip/getTrainTrip",
+        trainTrip
+      );
+
+      console.log("Result ----------------- : ", res.data.train_trip[0]);
+      setTrainTrip(res.data.train_trip[0]);
+      const trainTripId = res.data.train_trip[0].trip_id;
+      setTrainTripId(trainTripId);
+      const train_token_res = await axios.get(
+        `http://localhost:8000/traintoken/getTokenDetails/${trainTripId}`
+      );
+      console.log("Train Token ------------- : ", train_token_res.data.result);
+      setTrainToken(train_token_res.data.result);
       setTripChoose(true);
     } else {
       console.log(" select avilable train trip");
     }
-    setTripChoose(true);
+    // setTripChoose(true);
+  };
+
+  const addToOrder = async (product) => {
+    const element = {
+      token_Id: trainToken.token_Id,
+      order_Id: orderDetails.order_id,
+      product_id: product.product_id,
+      add_quantity: product.quantity - product.sent_quantity,
+    };
+    setTokenArray([...tokenArray, element]);
+    setTotCapacity(
+      totCapacity +
+        (product.quantity - product.sent_quantity) * product.capacity
+    );
+
+    const newArray = productDetails.filter(
+      (item) => item.product_id !== product.product_id
+    );
+    setProductDetails(newArray);
+  };
+
+  const addOrder = async () => {
+    try {
+      if (tokenArray.length > 0) {
+        const result = await axios.post(
+          "http://localhost:8000/traintoken/addTokenItems",
+          tokenArray
+        );
+        console.log("Result");
+        console.log("Result ----------------- : ", result.data);
+
+        const tokenCapacity = {
+          token_id: trainToken.token_Id,
+          capacity: totCapacity,
+        };
+
+        const res = await axios.post(
+          "http://localhost:8000/traintoken/updateCapacity",
+          tokenCapacity
+        );
+
+        console.log("Result 2 ----------------- : ", res.data);
+
+        alert("Order Added Successfully");
+      }
+    } catch (err) {
+      console.log("Error : ", err);
+    }
   };
 
   const handleSelectChange = (e) => {
@@ -128,6 +217,18 @@ export default function TCAddOrder() {
 
   console.log("Tranin  lIst , ", trainOrderList);
 
+  console.log("Train Trip ----------- : ", trainTrip);
+
+  console.log("Train Trip ID 43434343 ----------- : ", trainTripId);
+
+  console.log("Train Token ----------- : ", trainToken);
+
+  console.log("Order Details ################## : ", orderDetails);
+
+  console.log("Product Details ################## : ", productDetails);
+
+  console.log("Token Array +++++++++++++++++ : ", tokenArray);
+
   return (
     <>
       {tripChoose ? (
@@ -137,23 +238,131 @@ export default function TCAddOrder() {
               className="col-12"
               style={{ height: "50px", backgroundColor: "#B8CCF0" }}
             >
-              <h2>Submit Train Token ----- </h2>
+              <h2>Submit Train Token -----</h2>
             </div>
           </div>
-          <div className=" row d-flex justify-content-center align-items-center flex-wrap  ">
+          <div className="row justify-content-center align-items-center">
             <div className="bg-light col-12 col-lg-11 addOrderContainer my-4">
-              <div className="col-12 col-md-8 float-md-start m-2 border-bottom border-1 d-flex  ">
+              <div className="col-12 col-md-8 float-md-start m-2 border-bottom border-1 d-flex">
                 <h3 className="orderTopic">{`Order_ID : ${id}`} </h3>
                 <h3 className="storeTopic mx-5 ">{`Store_ID : ${storeId}`} </h3>
-                <h3 className="tokenTopic">TK_ 001</h3>
+                <h3 className="tokenTopic">TK_ID : {trainToken?.token_Id}</h3>
                 <h3 className="dateTopic mx-5 ">
                   {currentDate.toLocaleString()}
                 </h3>
               </div>
               <div className="col-12 col-md-3 m-2 bg-body-tertiary float-md-end">
                 <div className="capacityContainer text-center ">
-                  <h3>Capacity : 1500</h3>
+                  <h3>
+                    Avilable Capacity :{" "}
+                    {trainTrip.train_capacity -
+                      trainToken.curr_capacity -
+                      totCapacity}
+                  </h3>
                 </div>
+              </div>
+              <h2 className="text-center my-2 mx-3"> Order Details </h2>
+              <div className="row">
+                {/* ----------------------------------------------------------------------------------------------------------- */}
+
+                <section className=" ">
+                  <div className="container-fluid h-100 ">
+                    <div className="row d-flex justify-content-center align-items-center h-100">
+                      <div className="col-md-12 col-xl-10">
+                        <div className="card mask-custom">
+                          <div className="card-body p-4 ">
+                            <div className="text-center pt-3 pb-2">
+                              <img
+                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
+                                alt="Check"
+                                width="60"
+                              />
+                            </div>
+                            <table className="table  mb-0">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Order Id</th>
+                                  <th scope="col">Product Id</th>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">State</th>
+                                  <th scope="col">Quantity</th>
+                                  <th scope="col">Capacity</th>
+                                  <th scope="col"></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {productDetails?.map((product) => {
+                                  return (
+                                    <>
+                                      <tr className="fw-normal">
+                                        <th>
+                                          <span className="ms-2">
+                                            {orderDetails.order_id}
+                                          </span>
+                                        </th>
+                                        <td className="align-middle">
+                                          <span>{product.product_id}</span>
+                                        </td>
+                                        <td className="align-middle">
+                                          <span>{product.name}</span>
+                                        </td>
+                                        <td className="align-middle">
+                                          <h6 className="mb-0">
+                                            <span className="badge bg-danger">
+                                              {orderDetails.state}
+                                            </span>
+                                          </h6>
+                                        </td>
+                                        <td className="align-middle">
+                                          <span>
+                                            {product.quantity -
+                                              product.sent_quantity}
+                                          </span>
+                                        </td>
+                                        <td className="align-middle">
+                                          <span>
+                                            {(product.quantity -
+                                              product.sent_quantity) *
+                                              product.capacity}
+                                          </span>
+                                        </td>
+                                        <td className="align-middle">
+                                          <button
+                                            className=" btn btn-light btn-circle "
+                                            onClick={() => {
+                                              addToOrder(product);
+                                            }}
+                                          >
+                                            <i
+                                              class="fa-solid fa-check"
+                                              style={{
+                                                color: "#000000",
+                                                fontSize: "35px",
+                                              }}
+                                            ></i>
+                                          </button>
+                                        </td>
+                                      </tr>
+                                    </>
+                                  );
+                                })}
+                                {/* Add more table rows for tasks here */}
+                              </tbody>
+                            </table>
+                          </div>
+                          <button
+                            type="button"
+                            class="btn btn-success mx-5 my-3 custom-button"
+                            onClick={addOrder}
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                {/* ------------------------------------------------------------------------------------------------------------------------- */}
               </div>
             </div>
           </div>

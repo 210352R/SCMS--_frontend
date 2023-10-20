@@ -52,3 +52,29 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 700;
 }
+
+.btn-circle {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-circle:hover {
+  background-color: #e5e5e5; /* Change the color on hover */
+  border-color: rgb(217, 2, 2);
+}
+
+/* Add this to your CSS or Sass file */
+.custom-button {
+  font-size: 22px; /* Increase the font size as desired */
+  transition: background-color 0.3s; /* Add a smooth transition for the hover effect */
+
+  /* Define the hover effect */
+  &:hover {
+    background-color: #4caf50; /* Change the background color on hover */
+  }
+}

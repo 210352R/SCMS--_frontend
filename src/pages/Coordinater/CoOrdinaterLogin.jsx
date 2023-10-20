@@ -46,10 +46,10 @@ export default function CoOrdinaterLogin() {
           localStorage.setItem("token", res.data.token);
           console.log("LoginSucess ------------");
           console.log(res.data);
-          console.log(res.data.admin.type);
-          if (res.data.admin.type === "train_coordinator") {
+          console.log(res.data.coordinater.type);
+          if (res.data.coordinater.type === "train_coordinator") {
             navigate(`/traincodinaterboard/${cooDetails.userName}`);
-          } else if (res.data.admin.type === "truck_coordinator") {
+          } else if (res.data.coordinater.type === "truck_coordinator") {
             navigate(`/truckcodinaterboard/${cooDetails.userName}`);
           } else {
             alert("Invalid User -------");
