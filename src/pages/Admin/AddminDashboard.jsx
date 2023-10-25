@@ -114,6 +114,7 @@ const iconStyle = {
 };
 
 // functionalaties ----------------------
+// all functions ---------------------
 
 export default function AddminDashboard({ children, id }) {
   const navigate = useNavigate();
@@ -125,6 +126,7 @@ export default function AddminDashboard({ children, id }) {
     setOpen(!open);
   };
 
+  // kfafdjlgljghjljhklgh
   const [anchorEl, setAnchorEl] = React.useState(null);
   const Menuopen = Boolean(anchorEl);
   const handleMenuClick = (event) => {
@@ -340,6 +342,8 @@ export default function AddminDashboard({ children, id }) {
                 position: "absolute",
               }}
             >
+              {/* ////////////////////// */}
+
               <MenuItem
                 onClick={() => {
                   handleModelOpen();
