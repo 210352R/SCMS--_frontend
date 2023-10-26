@@ -231,6 +231,14 @@ export default function TCAddOrder() {
 
   return (
     <>
+      <div className="container-fluid d-flex mx-5 my-3">
+        <Link>
+          <i
+            class="fa-solid fa-backward"
+            style={{ color: "#ffffff", fontSize: "30px" }}
+          ></i>
+        </Link>
+      </div>
       {tripChoose ? (
         <div className="container-fluid min-vh-100 running-border">
           <div className="">

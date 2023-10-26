@@ -71,7 +71,7 @@ function App() {
         <Route path="/customerOrderlist/:id" element={<AdminStoreDetail />} />
 
         <Route
-          path="/TCAddorder/:id/:storeId/:capacity"
+          path="/TCAddorder/:id/:storeId/:capacity/:coId"
           element={<TCAddOrder />}
         ></Route>
 

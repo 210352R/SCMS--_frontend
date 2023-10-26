@@ -31,7 +31,10 @@ export default function AdminStoreDetail() {
     <div>
       <AddminDashboard id={id}>
         <h1>Stores</h1>
-        <div className="d-flex" style={{ width: "100%" }}>
+        <div
+          className="d-flex justify-content-center  flex-wrap"
+          style={{ width: "100%" }}
+        >
           {storeList?.map((store) => {
             return (
               <div>
