@@ -301,18 +301,17 @@ export default function COODash({ children, username }) {
             </IconButton>
             <Typography
               component="h1"
-              variant="h6"
+              variant="h5"
               color="inherit"
               noWrap
               sx={{
                 flexGrow: 1,
                 fontStyle: "italic",
                 fontWeight: "bold",
-                fontSize: "20px",
+                fontSize: "30px",
+                float: "left",
               }}
-            >
-              Dashboard
-            </Typography>
+            ></Typography>
             <IconButton color="inherit" onClick={handleMenuClick}>
               {/* <NotificationsIcon /> */}
 

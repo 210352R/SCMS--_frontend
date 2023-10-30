@@ -6,7 +6,7 @@ import { Button, Modal } from "react-bootstrap";
 import TruckDash from "./TruckDash";
 
 export default function Truck() {
-  const [addTruck, setAddTruck] = useState(true);
+  const [addTruck, setAddTruck] = useState(false);
   const { username, storeId } = useParams();
   const [currentOrder, setCurrentOrder] = useState(null);
   const [orders, setOrders] = useState([{}]);

@@ -43,6 +43,7 @@ import TCTokens from "./pages/Coordinater/TCTokens";
 import TCStoreDetails from "./pages/Coordinater/TCStoreDetails";
 import TCTrains from "./pages/Coordinater/TCTrains";
 import Truck from "./pages/Coordinater/Truck";
+import ViewReport from "./pages/Admin/AdminViewReports";
 
 function App() {
   return (

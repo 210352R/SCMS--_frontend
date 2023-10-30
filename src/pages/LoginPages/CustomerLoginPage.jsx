@@ -32,6 +32,7 @@ export default function CustomerLoginPage() {
       .get("http://localhost:8000/login/customers/authenticate")
       .then((res) => {
         if (res.data.success) {
+          console.log("kjghuisfhgiodjgkldjiogjdiohjjhfjdiohjfpihjd");
           const decodedToken = jwtDecode(token);
           console.log(decodedToken.user);
           setUsername(decodedToken.user);

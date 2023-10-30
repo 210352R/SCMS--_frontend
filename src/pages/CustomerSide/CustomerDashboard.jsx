@@ -69,7 +69,7 @@ export default function CustomerDashboard() {
           ) {
             console.log("Access Denied 222222");
 
-            alert("Login First");
+            //alert("Login First");
             navigate("/customerLogin");
           }
         }
@@ -164,14 +164,14 @@ export default function CustomerDashboard() {
               {/* Add your menu items here */}
               {/* Example menu item */}
               <li className="nav-item mt-3 mb-3">
-                <a href="#" className="nav-link align-middle px-0 d-flex">
+                <Link to={"/"} className="nav-link align-middle px-0 d-flex">
                   <FontAwesomeIcon
                     icon={faHome}
                     className="custom-icon fs-4 mx-1"
                     style={{ color: "white", fontSize: "15px" }}
                   />
                   <span className="ms-1 d-none d-sm-inline p-1">Home</span>
-                </a>
+                </Link>
               </li>
               <li className="nav-item mt-3 mb-3">
                 <Link

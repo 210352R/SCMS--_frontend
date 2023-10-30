@@ -6,10 +6,11 @@ import { useState } from "react";
 //import useeffect
 import { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AddOrderPage() {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   //Fetch data from data base -----------------------------
   const [productsData, setProductsData] = useState([{}]);
   const [routes, setRoutes] = useState([{}]);
@@ -33,6 +34,8 @@ export default function AddOrderPage() {
     const intValue = parseInt(inputValue, 10); // Use parseInt to convert the input to an integer
     setTempQuantity1(intValue);
   };
+
+  // Function to enable or disable the button based on some condition
 
   // useEffects
 
@@ -114,7 +117,8 @@ export default function AddOrderPage() {
         "http://localhost:8000/customer/addOrder",
         orderDetails
       );
-      alert(" Wade Goda --------------------------------------");
+      alert("Order Added Successfull ----");
+      navigate(`/dashboard/${id}`);
     } catch (err) {
       console.log("Error : ", err);
     }

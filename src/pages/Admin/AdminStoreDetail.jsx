@@ -30,7 +30,6 @@ export default function AdminStoreDetail() {
   return (
     <div>
       <AddminDashboard id={id}>
-        <h1>Stores</h1>
         <div
           className="d-flex justify-content-center  flex-wrap"
           style={{ width: "100%" }}

@@ -47,7 +47,9 @@ export default function TCAddOrder() {
     console.log("Running ---- ");
 
     axios
-      .get(`http://localhost:8000/traintoken/getNotFillTokenDetails`)
+      .get(
+        `http://localhost:8000/traintoken/getNotFillTokenDetailsByStore/${storeId}`
+      )
       .then((res) => {
         console.log("Running ---- ");
         console.log("Order ---- ", res.data);
@@ -533,7 +535,7 @@ export default function TCAddOrder() {
                         </p>
                       </div>
                       <div className="col-12 col-md-6">
-                        <label htmlFor="selectOption">Select an option:</label>
+                        <label htmlFor="selectOption">Select a Train:</label>
                         <select
                           className="form-control"
                           id="selectOption"
@@ -546,7 +548,7 @@ export default function TCAddOrder() {
                               <>
                                 <option
                                   value={train.train_id}
-                                >{`${train.train_id} : ${train?.train_capacity}`}</option>
+                                >{`${train.train_id} : - ${train?.train_capacity}`}</option>
                               </>
                             );
                           })}
@@ -571,7 +573,7 @@ export default function TCAddOrder() {
                               <>
                                 <option
                                   value={train.start_time}
-                                >{`${train.train_id}:${train.start_time}`}</option>
+                                >{`${train.start_time}`}</option>
                               </>
                             );
                           })}

@@ -10,10 +10,20 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import ModalAlert from "../../components/Modal";
 
+const token = localStorage.getItem("token");
+//Create an Axios instance with custom headers
+const axiosInstance = axios.create({
+  headers: {
+    Authorization: `Bearer ${token}`, // Set the token in the 'Authorization' header
+  },
+});
+
 export default function CoOrdinaterLogin() {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
+
+  const [username, setUsername] = useState();
 
   const [truckCoo, setTruckCoo] = useState({});
 
@@ -32,6 +42,55 @@ export default function CoOrdinaterLogin() {
     });
   };
 
+  // Authenticate -----------------------------------------------------------------------
+  useEffect(() => {
+    console.log("Storage Token : ", localStorage.getItem("token"));
+    axiosInstance
+      .get("http://localhost:8000/login/tcoo/authenticate")
+      .then((res) => {
+        if (res.data.success) {
+          console.log("kjghuisfhgiodjgkldjiogjdiohjjhfjdiohjfpihjd");
+          const decodedToken = jwtDecode(token);
+          console.log(decodedToken.user);
+          setUsername(decodedToken.user);
+          console.log("Wade godaaa --------- ");
+          navigate(`/traincodinaterboard/${decodedToken.user}}`);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  ///trcoo/authenticate
+
+  useEffect(() => {
+    console.log("Storage Token : ", localStorage.getItem("token"));
+    axiosInstance
+      .get("http://localhost:8000/login/trcoo/authenticate")
+      .then((res) => {
+        if (res.data.success) {
+          console.log("kjghuisfhgiodjgkldjiogjdiohjjhfjdiohjfpihjd");
+          const decodedToken = jwtDecode(token);
+          console.log(decodedToken.user);
+          setUsername(decodedToken.user);
+          console.log("Wade godaaa ------------- ");
+          axios
+            .get(
+              `http://localhost:8000/coordinater/getStoreId/${decodedToken.user}`
+            )
+            .then((res) => {
+              console.log("Store ID ------ ", res.data.storeId);
+              navigate(`/truckPage/${decodedToken.user}/${res.data.storeId}`);
+            });
+
+          //navigate(`/truckPage/:username/:storeId`);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
   // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
