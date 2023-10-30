@@ -43,11 +43,11 @@ import { useNavigate } from "react-router-dom";
 
 import { Link, useParams } from "react-router-dom";
 
-import { mainListItems, secondaryListItems } from "./NavBarList";
 import PieChartContainer from "../../components/PieChartContainer";
 
 import HomeIcon from "@mui/icons-material/Home";
-
+import TrainIcon from "@mui/icons-material/Train";
+import TokenIcon from "@mui/icons-material/Token";
 // import { mainListItems, secondaryListItems } from "./listItems";
 
 // function Copyright(props) {
@@ -118,7 +118,7 @@ const iconStyle = {
 // functionalaties ----------------------
 // all functions ---------------------
 
-export default function AddminDashboard({ children, id }) {
+export default function TruckDash({ children, username, storeId }) {
   const navigate = useNavigate();
   const [Modelopen, setModelOpen] = useState(false);
   const handleModelOpen = () => setModelOpen(true);
@@ -138,25 +138,25 @@ export default function AddminDashboard({ children, id }) {
     setAnchorEl(null);
   };
 
-  const [admin, setAdmin] = useState([{}]);
+  const [coodinater, setCoordinater] = useState([{}]);
 
   // functions -------------
   const logOut = () => {
     localStorage.removeItem("token");
     console.log("logged out");
-    navigate("/adminLogin");
+    navigate("/CoOrdinaterLogin");
   };
 
   useEffect(() => {
-    console.log("ID : ", id);
+    console.log("UserName  : ", username);
 
     axios
-      .get(`http://localhost:8000/admin/get/${id}`)
+      .get(`http://localhost:8000/coordinater/getTruckCoo/${username}`)
       .then((res) => {
         console.log("Data : ", res.data);
         if (res.data.sucess) {
-          console.log("Admin Get Success ----");
-          setAdmin(res.data.admin[0]);
+          console.log("Cooo Get Success ----");
+          setCoordinater(res.data.coordinater[0]);
         }
       })
       .catch((err) => {
@@ -164,7 +164,7 @@ export default function AddminDashboard({ children, id }) {
       });
   }, []);
 
-  console.log("Admin : ", admin);
+  console.log("Coordinater : ", coodinater);
   return (
     <div className="overlay">
       {/* model eka  */}
@@ -188,8 +188,8 @@ export default function AddminDashboard({ children, id }) {
                         className="rounded-circle img-fluid"
                         style={{ width: "150px" }}
                       />
-                      <h5 className="my-3">{admin?.user_name}</h5>
-                      <p className="text-muted mb-1">SCMS - Administrater</p>
+                      <h5 className="my-3">{coodinater?.user_name}</h5>
+                      <p className="text-muted mb-1">SCMS - Co-Ordinater</p>
                       <p className="text-muted mb-4">
                         Bay Area, San Francisco, CA
                       </p>
@@ -216,7 +216,7 @@ export default function AddminDashboard({ children, id }) {
                         </div>
                         <div className="col-sm-9">
                           <p className="text-muted mb-0">
-                            {admin?.first_name} {admin?.last_name}
+                            {coodinater?.first_name} {coodinater?.last_name}
                           </p>
                         </div>
                       </div>
@@ -226,7 +226,7 @@ export default function AddminDashboard({ children, id }) {
                           <p className="mb-0">Email</p>
                         </div>
                         <div className="col-sm-9">
-                          <p className="text-muted mb-0">{admin?.email}</p>
+                          <p className="text-muted mb-0">{coodinater?.email}</p>
                         </div>
                       </div>
                       <hr />
@@ -236,7 +236,7 @@ export default function AddminDashboard({ children, id }) {
                         </div>
                         <div className="col-sm-9">
                           <p className="text-muted mb-0">
-                            {admin?.phone_number}
+                            {coodinater?.phone_number}
                           </p>
                         </div>
                       </div>
@@ -255,7 +255,9 @@ export default function AddminDashboard({ children, id }) {
                           <p className="mb-0">Address</p>
                         </div>
                         <div className="col-sm-9">
-                          <p className="text-muted mb-0">{admin?.address}</p>
+                          <p className="text-muted mb-0">
+                            {coodinater?.address}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -309,7 +311,7 @@ export default function AddminDashboard({ children, id }) {
                 fontSize: "20px",
               }}
             >
-              Admin Dashboard
+              Store : {storeId}
             </Typography>
             <IconButton color="inherit" onClick={handleMenuClick}>
               {/* <NotificationsIcon /> */}
@@ -327,7 +329,7 @@ export default function AddminDashboard({ children, id }) {
                   marginRight: "5px",
                 }}
               >
-                {admin?.user_name}
+                {coodinater?.user_name}
               </Typography>
 
               <AccountBoxIcon style={iconStyle} />
@@ -386,7 +388,10 @@ export default function AddminDashboard({ children, id }) {
                 </ListItemButton>
               </Link>
 
-              <Link to={`/adminboard/${id}`} className="link-no-decoration">
+              <Link
+                to={`/traincodinaterboard/${username}`}
+                className="link-no-decoration"
+              >
                 <ListItemButton>
                   <ListItemIcon>
                     <DashboardIcon />
@@ -396,28 +401,27 @@ export default function AddminDashboard({ children, id }) {
               </Link>
 
               <Link
-                to={`/adminorderdetails/${id}`}
+                to={`/coo_train_token/${username}`}
                 className="link-no-decoration"
               >
                 <ListItemButton>
                   <ListItemIcon>
-                    <ShoppingCartIcon />
+                    <TokenIcon />
                   </ListItemIcon>
-
-                  <ListItemText primary="Orders" />
+                  <ListItemText primary="Tokens" />
                 </ListItemButton>
               </Link>
 
               {/* /admincustomerlist/:id */}
               <Link
-                to={`/admincustomerlist/${id}`}
                 className="link-no-decoration"
+                to={`/coo_trains/${username}`}
               >
                 <ListItemButton>
                   <ListItemIcon>
-                    <PeopleIcon />
+                    <TrainIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Customers" />
+                  <ListItemText primary="Trains" />
                 </ListItemButton>
               </Link>
 
@@ -428,7 +432,10 @@ export default function AddminDashboard({ children, id }) {
                 <ListItemText primary="Reports" />
               </ListItemButton>
 
-              <Link to={`/adminstorelist/${id}`} className="link-no-decoration">
+              <Link
+                className="link-no-decoration"
+                to={`/coostorelist/${username}`}
+              >
                 <ListItemButton>
                   <ListItemIcon>
                     <LayersIcon />

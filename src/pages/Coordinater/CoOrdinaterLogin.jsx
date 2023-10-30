@@ -15,6 +15,8 @@ export default function CoOrdinaterLogin() {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
 
+  const [truckCoo, setTruckCoo] = useState({});
+
   const handleClose = () => setShow(false);
 
   const [cooDetails, setCooDetails] = useState({
@@ -50,7 +52,13 @@ export default function CoOrdinaterLogin() {
           if (res.data.coordinater.type === "train_coordinator") {
             navigate(`/traincodinaterboard/${cooDetails.userName}`);
           } else if (res.data.coordinater.type === "truck_coordinator") {
-            navigate(`/truckcodinaterboard/${cooDetails.userName}`);
+            console.log(res.data.truckCoo[0]);
+            setTruckCoo(res.data.truckCoo[0]);
+            console.log("Truck Coo : ", truckCoo);
+            console.log("Store Id : ", res.data.truckCoo[0]?.store_id);
+            navigate(
+              `/truckPage/${cooDetails.userName}/${res.data.truckCoo[0]?.store_id}`
+            );
           } else {
             alert("Invalid User -------");
           }
@@ -67,6 +75,7 @@ export default function CoOrdinaterLogin() {
       });
   };
 
+  console.log("truck Coo ", truckCoo);
   return (
     <div className="container vh-100 d-flex align-items-center  justify-content-center ">
       <div className="login-form">

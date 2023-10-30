@@ -37,6 +37,13 @@ import TCoDash from "./pages/Coordinater/TCoDash";
 import TCAddOrder from "./pages/Coordinater/TCAddOrder";
 import AddOrderPage from "./pages/CustomerSide/AddOrderPage";
 
+import COODash from "./pages/Coordinater/COODash";
+import TCFirstPage from "./pages/Coordinater/TCFirstPage";
+import TCTokens from "./pages/Coordinater/TCTokens";
+import TCStoreDetails from "./pages/Coordinater/TCStoreDetails";
+import TCTrains from "./pages/Coordinater/TCTrains";
+import Truck from "./pages/Coordinater/Truck";
+
 function App() {
   return (
     <Router>
@@ -70,6 +77,8 @@ function App() {
         <Route path="/adminstorelist/:id" element={<AdminStoreDetail />} />
         <Route path="/customerOrderlist/:id" element={<AdminStoreDetail />} />
 
+        <Route path="/coostorelist/:username" element={<TCStoreDetails />} />
+
         <Route
           path="/TCAddorder/:id/:storeId/:capacity/:coId"
           element={<TCAddOrder />}
@@ -77,6 +86,10 @@ function App() {
 
         <Route path="/addOrder/:id" element={<AddOrderPage />} />
         {/* <Route path="/trainCoordinaterDash" element={<TCoDash />} /> */}
+        <Route path="/coo_train_token/:username" element={<TCTokens />} />
+        <Route path="/coo_trains/:username" element={<TCTrains />} />
+
+        <Route path="/truckPage/:username/:storeId" element={<Truck />} />
       </Routes>
     </Router>
     // <>

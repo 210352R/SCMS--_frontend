@@ -1,0 +1,71 @@
+{
+    "orders": [
+      {
+        "id": 1,
+        "store_id": 101,
+        "date": "2023-10-19",
+        "truck_id": null
+      },
+      {
+        "id": 2,
+        "store_id": 102,
+        "date": "2023-10-20",
+        "truck_id": "32"
+      },
+      {
+        "id": 3,
+        "store_id": 103,
+        "date": "2023-10-21",
+        "truck_id": null
+      }
+    ],
+    "trucks": [
+      {
+        "id": 32,
+        "model": "Truck Model A",
+        "driver_id": 101,
+        "assistant_driver_id": 102
+      },
+      {
+        "id": 33,
+        "model": "Truck Model B",
+        "driver_id": 104,
+        "assistant_driver_id": 105
+      }
+    ],
+    "routes": [
+      {
+        "id": 1,
+        "start_location": "Location A",
+        "end_location": "Location B",
+        "truck_id": 32
+      },
+      {
+        "id": 2,
+        "start_location": "Location C",
+        "end_location": "Location D",
+        "truck_id": 33
+      }
+    ],
+    "drivers": [
+      {
+        "id": 101,
+        "name": "Driver Name A"
+      },
+      {
+        "id": 104,
+        "name": "Driver Name B"
+      }
+    ],
+    "assistant_drivers": [
+      {
+        "id": 102,
+        "name": "Assistant Driver A"
+      },
+      {
+        "id": 105,
+        "name": "Assistant Driver B"
+      }
+    ]
+  }
+  

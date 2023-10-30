@@ -14,7 +14,7 @@ import axios from "axios";
 import TaskList from "../../components/TaskList";
 
 export default function TCAddOrder() {
-  const { id, storeId, capacity } = useParams();
+  const { id, storeId, capacity, coId } = useParams();
   const [trainTrip, setTrainTrip] = useState(null);
   const [trainToken, setTrainToken] = useState(null);
   const [trainTripId, setTrainTripId] = useState(null);
@@ -40,6 +40,22 @@ export default function TCAddOrder() {
 
   const [currentDate, setCurrentDate] = useState(new Date());
 
+  const [tokenList, setTokenList] = useState([{}]);
+
+  // useEffect Hook ---
+  useEffect(() => {
+    console.log("Running ---- ");
+
+    axios
+      .get(`http://localhost:8000/traintoken/getNotFillTokenDetails`)
+      .then((res) => {
+        console.log("Running ---- ");
+        console.log("Order ---- ", res.data);
+        if (res.data.sucess) {
+          setTokenList(res.data.tokens);
+        }
+      });
+  }, []);
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentDate(new Date());
@@ -232,7 +248,7 @@ export default function TCAddOrder() {
   return (
     <>
       <div className="container-fluid d-flex mx-5 my-3">
-        <Link>
+        <Link to={`/traincodinaterboard/${coId}`}>
           <i
             class="fa-solid fa-backward"
             style={{ color: "#ffffff", fontSize: "30px" }}
@@ -421,27 +437,31 @@ export default function TCAddOrder() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Express Train</td>
-                        <td>2023-10-16</td>
-                        <td>Store A</td>
-                        <td>250</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Local Train</td>
-                        <td>2023-10-17</td>
-                        <td>Store B</td>
-                        <td>100</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>High-Speed Train</td>
-                        <td>2023-10-18</td>
-                        <td>Store C</td>
-                        <td>400</td>
-                      </tr>
+                      {tokenList?.map((token) => {
+                        const date = new Date(token.Date);
+
+                        // Extract year, month, and day from the date
+                        const year = date.getFullYear();
+                        const month = String(date.getMonth() + 1).padStart(
+                          2,
+                          "0"
+                        ); // Month is 0-based, so add 1 and pad with 0 if needed
+                        const day = String(date.getDate()).padStart(2, "0");
+
+                        // Format the date in the desired format
+                        const formattedDate = `${year}-${month}-${day}`;
+                        return (
+                          <tr>
+                            <td>{`${token.token_Id}`}</td>
+                            <td>{`${token.name}`}</td>
+                            <td>{`${formattedDate}`}</td>
+                            <td>{`${token.store_id}`}</td>
+                            <td>{`${
+                              token.train_capacity - token.curr_capacity
+                            }`}</td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>

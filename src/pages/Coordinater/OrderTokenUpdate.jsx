@@ -5,11 +5,9 @@ import { Link, useParams } from "react-router-dom";
 import AddminDashboard from "../Admin/AddminDashboard";
 import COODash from "./COODash";
 
-export default function TCoDash() {
+export default function OrderTokenUpdate() {
   const { id } = useParams();
   const [orderList, setOrderList] = useState([{}]);
-
-  const [tokenList, setTokenList] = useState([{}]);
 
   useEffect(() => {
     axios
@@ -25,39 +23,13 @@ export default function TCoDash() {
         console.log("Error ---- ", err);
       });
     console.log("Running ---- ");
-
-    axios
-      .get(`http://localhost:8000/traintoken/getNotFillTokenDetails`)
-      .then((res) => {
-        console.log("Running ---- ");
-        console.log("Order ---- ", res.data);
-        if (res.data.sucess) {
-          setTokenList(res.data.tokens);
-        }
-      });
   }, []);
-
-  console.log("ohuihgoujgiodfjgoijd : ", tokenList);
-
   return (
     <COODash username={id}>
       <div className="container-fluid min-vh-100">
         <div className="row">
           <div className="col-12 d-flex mt-3 justify-content-center  flex-wrap">
             {/* Add your DetCard components here */}
-            {tokenList.map((token, index) => (
-              <div key={index} className="col-md-2 col-sm-6 col-12">
-                <DetCard
-                  Topic={`Train trip token ${token.token_Id}`}
-                  subTopic={`Train - ${token.name}`}
-                  details={`Avilable - ${
-                    token.train_capacity - token.curr_capacity
-                  }`}
-                  store={`store - ${token.store_id}`}
-                  link="#"
-                />
-              </div>
-            ))}
 
             {/* Add more DetCard components as needed */}
           </div>
