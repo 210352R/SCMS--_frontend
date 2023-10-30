@@ -158,8 +158,10 @@ export default function TCAddOrder() {
     } else {
       console.log(" select avilable train trip");
     }
-    // setTripChoose(true);
+    //setTripChoose(true);
   };
+
+  console.log("Train 43434343 ----------- : ", trainToken);
 
   const addToOrder = async (product) => {
     const element = {
@@ -183,13 +185,6 @@ export default function TCAddOrder() {
   const addOrder = async () => {
     try {
       if (tokenArray.length > 0) {
-        const result = await axios.post(
-          "http://localhost:8000/traintoken/addTokenItems",
-          tokenArray
-        );
-        console.log("Result");
-        console.log("Result ----------------- : ", result.data);
-
         const tokenCapacity = {
           token_id: trainToken.token_Id,
           capacity: totCapacity,
@@ -201,6 +196,19 @@ export default function TCAddOrder() {
         );
 
         console.log("Result 2 ----------------- : ", res.data);
+        if (!res.data.sucess) {
+          alert(res.data.message);
+          return;
+        }
+        console.log(
+          "Rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr ----------------- : "
+        );
+        const result = await axios.post(
+          "http://localhost:8000/traintoken/addTokenItems",
+          tokenArray
+        );
+        console.log("Result");
+        console.log("Result ----------------- : ", result.data);
 
         alert("Order Added Successfully");
       }
@@ -277,12 +285,23 @@ export default function TCAddOrder() {
               </div>
               <div className="col-12 col-md-3 m-2 bg-body-tertiary float-md-end">
                 <div className="capacityContainer text-center ">
-                  <h3>
-                    Avilable Capacity :{" "}
-                    {trainTrip.train_capacity -
-                      trainToken.curr_capacity -
-                      totCapacity}
-                  </h3>
+                  {trainTrip?.train_capacity -
+                  trainToken?.curr_capacity -
+                  totCapacity ? (
+                    <h3 className="capacityTopic">
+                      Available Capacity:{" "}
+                      {trainTrip?.train_capacity -
+                        trainToken?.curr_capacity -
+                        totCapacity}
+                    </h3>
+                  ) : (
+                    <h3 className="capacityTopic">
+                      Avilable Capacity :{" "}
+                      {trainToken?.train_capacity -
+                        trainToken?.curr_capacity -
+                        totCapacity}
+                    </h3>
+                  )}
                 </div>
               </div>
               <h2 className="text-center my-2 mx-3"> Order Details </h2>
@@ -451,13 +470,18 @@ export default function TCAddOrder() {
                         // Format the date in the desired format
                         const formattedDate = `${year}-${month}-${day}`;
                         return (
-                          <tr>
+                          <tr
+                            onClick={() => {
+                              setTrainToken(token);
+                              setTripChoose(true);
+                            }}
+                          >
                             <td>{`${token.token_Id}`}</td>
                             <td>{`${token.name}`}</td>
                             <td>{`${formattedDate}`}</td>
                             <td>{`${token.store_id}`}</td>
                             <td>{`${
-                              token.train_capacity - token.curr_capacity
+                              token?.train_capacity - token.curr_capacity
                             }`}</td>
                           </tr>
                         );
@@ -522,7 +546,7 @@ export default function TCAddOrder() {
                               <>
                                 <option
                                   value={train.train_id}
-                                >{`${train.train_id} : ${train.train_capacity}`}</option>
+                                >{`${train.train_id} : ${train?.train_capacity}`}</option>
                               </>
                             );
                           })}
