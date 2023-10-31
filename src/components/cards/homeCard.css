@@ -4,7 +4,15 @@
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
-  border-radius: 10;
+  border-radius: 15;
+}
+.img-fluid{
+  width: 400px;
+  height: 250px;
+}
+.card-body{
+  background-color: #250C07 ;
+  color: antiquewhite;
 }
 .cardmy {
   transition: 0.5s;
@@ -32,6 +40,7 @@
 }
 .cardmy-text {
   height: 80px;
+  color:aliceblue;
 }
 
 .cardmy::before,

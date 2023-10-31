@@ -3,7 +3,7 @@ import "./homeCard.css";
 import { blue, red, yellow } from "@mui/material/colors";
 import { withTheme } from "@emotion/react";
 
-export default function HomeCards() {
+export default function HomeCard2() {
   return (
     <>
       <div class="card cardmy mainConatiner">
@@ -12,7 +12,7 @@ export default function HomeCards() {
           data-mdb-ripple-color="light"
         >
           <img
-            src="https://media.istockphoto.com/id/470811618/photo/wagon-of-freight-train-with-containers.jpg?s=612x612&w=0&k=20&c=5QMaGbBVkYBy8s0o_18lR-jIB0VyO71RiUp300KsNoE="
+            src="https://plus.unsplash.com/premium_photo-1661963812996-d5d24d1a7fcc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
             class="img-fluid"
           />
           <a href="#!">
@@ -23,9 +23,9 @@ export default function HomeCards() {
           </a>
         </div>
         <div class="card-body ">
-          <h5 class="card-title cardmy-title">Railway Logistics</h5>
+          <h5 class="card-title cardmy-title">Store and Delivery Management</h5>
           <p class="card-text">
-          Our railway logistics system optimizes routes and schedules for efficient, cost-effective transportation, ensuring timely delivery to key cities
+          we handle stores and optimize delivery routes for maximum efficiency in our operations.
           </p>
         </div>
       </div>

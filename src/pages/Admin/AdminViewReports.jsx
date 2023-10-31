@@ -195,17 +195,19 @@ function ViewReport() {
     const handleViewOrdersClick = async () => {
       try {
         // Replace the URL with your actual API endpoint for fetching customer details
-        const response = await fetch(
-          `https://api.example.com/customers/${customerId}`
-        );
+        // const response = await fetch(
+        //   `https://api.example.com/customers/${customerId}`
+        // );
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch customer details");
-        }
+        // if (!response.ok) {
+        //   throw new Error("Failed to fetch customer details");
+        // }
 
-        const data = await response.json();
+        // const data = await response.json();
 
-        // Assuming the response structure is { name, email, orders }
+        const data ={}
+
+        // Assuming the response structure is { name, cust_ID, orders }
         setCustomerDetails(data);
 
         // Show the dialog
@@ -216,7 +218,6 @@ function ViewReport() {
     };
 
     const handleDialogClose = () => {
-      // Close the dialog
       setShowDialog(false);
     };
 
@@ -237,7 +238,7 @@ function ViewReport() {
           <div className="order-dialog">
             <h2>Customer Details</h2>
             <p>Name: {customerDetails.name}</p>
-            <p>Email: {customerDetails.email}</p>
+            <p>Customer ID: {customerDetails.cust_ID}</p>
             <h3>Orders:</h3>
             <ul>
               {customerDetails.orders.map((order) => (
@@ -255,8 +256,27 @@ function ViewReport() {
   };
 
   return (
-    <div>
-      <h1>Sales Report</h1>
+    <div className="main">
+      <nav>
+        <ul>
+          <li>
+            <a href="#revenue_and_sales">revenue_and_sales</a>
+          </li>
+          <li>
+            <a href="#city_sales">city_sales</a>
+          </li>
+          <li>
+            <a href="#work_hours">work_hours</a>
+          </li>
+          <li>
+            <a href="#truck_hours">truck_hours</a>
+          </li>
+          <li>
+            <a href="#cust_orders">cust_orders</a>
+          </li>                    
+        </ul>
+      </nav>
+      <h1 className="header1">Sales Report</h1>
       <select
         className="select-list"
         value={selectedYear}
@@ -267,39 +287,50 @@ function ViewReport() {
         <option value="2024">2024</option>
         {/* Add more years as needed */}
       </select>
-
+      <section id ='revenue_and_sales'>
       <div className="one-line">
         <div className="dialog-box">
-          <h3>Quaterly Revenue</h3>
+          <h3 className="header3">Quaterly Revenue</h3>
           <div className="barchart">
             <BarChart selectedYear={selectedYear} />
-          </div>
-        </div>
+           </div>
+         </div>
 
+         <div className="dialog-box">
+          <h3 className="header3">Items With Most Sales</h3>
+           <div className="pieChart">
+             <PieChart selectedYear={selectedYear} />
+           </div>
+         </div>
+        </div>
+      </section>
+
+      <section id='city_sales'>
+        <h2 className="header2">Sales based cities</h2>
         <div className="dialog-box">
-          <h3>Items With Most Sales</h3>
-          <div className="pieChart">
-            <PieChart selectedYear={selectedYear} />
-          </div>
+          <CityDialog />
         </div>
-      </div>
+      </section>
 
-      <h2>Sales based cities</h2>
-      <div className="dialog-box">
-        <CityDialog />
-      </div>
+      <section id='work_hours'>
+        <h2 className="header2">Working Hours of Drivers and assistants</h2>
+        <div className="dialog-box">
+          <WorkingHoursTable />
+        </div>
+      </section>
 
-      <h2>Working Hours of Drivers and assistants</h2>
-      <div className="dialog-box">
-        <WorkingHoursTable />
-      </div>
+      <section id='truck_hours'>
+        <h2 className="header2">Trucks Used Hours</h2>
+          <div className="dialog-box">
+            <TruckHoursTable />
+          </div>
+      </section>
 
-      <h2>Trucks Used Hours</h2>
-      <div className="dialog-box">
-        <TruckHoursTable />
-      </div>
-      <h2>View Customer Orders</h2>
-      <OrderButton />
+      <section id='cust_orders'>
+        <h2 className="header2">View Customer Orders</h2>
+        <OrderButton />
+      </section>
+
     </div>
   );
 }
