@@ -49,7 +49,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<ViewReport />} />
         <Route path="/customerLogin" element={<CustomerLoginPage />} />
         <Route path="/adminLogin" element={<AdminLogin />} />
         <Route path="/coordinaterLogin" element={<CoOrdinaterLogin />} />

@@ -1,0 +1,173 @@
+.header1,
+.header2 {
+  color: rgb(247, 241, 241);
+  margin-top: 10px;
+  margin-left: 20px;
+  text-align: center;
+}
+
+.select {
+  color: rgb(19, 18, 18);
+  text-align: center;
+}
+
+.dialog-box {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #fffefe;
+  padding: 7px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+  width: 100%;
+}
+
+.one-line {
+  display: flex;
+}
+
+.barChart,
+.pieChart {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 5px;
+  background-color: #e3dbdb; /* Black background for the barchart component */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* White box shadow for contrast */
+  max-width: 300px; /* Adjust the maximum width as needed */
+  margin: 0 auto; /* Center the container horizontally */
+  text-align: center; /* Center the chart within the container */
+}
+
+.select-list {
+  margin-left: 20px;
+  width: 100px;
+}
+
+.tabbed-table-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+
+.tab:hover {
+  background-color: #f0f0f0;
+}
+
+.tab.active {
+  border-bottom: 2px solid #3498db;
+  background-color: #e0e0e0;
+}
+
+.table {
+  margin-top: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.working-hours-container {
+  margin-top: 20px;
+}
+
+.working-hours-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.working-hours-table th,
+.working-hours-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.working-hours-table th {
+  background-color: #f2f2f2;
+}
+
+.order-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.view-orders-button {
+  margin-left: 20px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.input-details {
+  margin-left: 20px;
+}
+
+.order-dialog {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+  max-width: 400px;
+}
+
+.order-dialog h2 {
+  color: #333;
+}
+
+.order-dialog p {
+  margin: 5px 0;
+}
+
+.order-dialog h3 {
+  margin-top: 10px;
+  color: #333;
+}
+
+.order-dialog ul {
+  list-style: none;
+  padding: 0;
+}
+
+.order-dialog li {
+  margin-bottom: 5px;
+}
+
+.order-dialog button {
+  padding: 8px 15px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}

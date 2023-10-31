@@ -259,6 +259,9 @@ export default function CustomerDashboard() {
                           </thead>
                           <tbody>
                             {orderList?.map((order) => {
+                              const date = new Date(order?.date);
+
+                              const formattedDate = date.toLocaleString();
                               return (
                                 <tr>
                                   <th scope="row" className="row_style">
@@ -268,7 +271,7 @@ export default function CustomerDashboard() {
                                       {order?.order_id}
                                     </Link>
                                   </th>
-                                  <td>{order?.date}</td>
+                                  <td>{formattedDate}</td>
                                   <td>{order?.store_id}</td>
                                   <td>{order?.route_id}</td>
                                   <td>{order?.state}</td>

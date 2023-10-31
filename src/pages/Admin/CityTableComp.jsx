@@ -1,14 +1,39 @@
-// TabbedTable.js
-
 import React, { useState } from "react";
 import "./AdminViewReports.css";
+import { useEffect, useRef } from "react";
+import axios from "axios";
 
-// stores tika -------------------------------
-const cities = ["Colombo", "Kandy", "Galle"]; // Add your cities here
+const TabbedTable = ({ selectedYear }) => {
+  const cities = ["S001", "S002", "S003", "S004", "S005"];
+  const [activeCity, setActiveCity] = useState("S001");
 
-const TabbedTable = () => {
-  const [activeCity, setActiveCity] = useState(cities[0]);
+  const [tableData, setTableData] = useState([
+    { route_id: "Route 1", orders: 50, tot_price: 1000 },
+    { route_id: "Route 2", orders: 30, tot_price: 700 },
+  ]);
 
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8000/report/getSalesBasedId/${selectedYear}/${activeCity}`
+      )
+      .then((res) => {
+        console.log("dataset ek : ", res.data);
+        if (res.data.sucess) {
+          setTableData(res.data?.data);
+        } else {
+          setTableData([
+            { route_id: "Route 1", orders: 50, tot_price: 1000 },
+            { route_id: "Route 2", orders: 30, tot_price: 700 },
+          ]);
+        }
+      })
+      .catch((err) => {
+        console.log("Error : ", err);
+      });
+  }, [selectedYear, activeCity]);
+
+  console.log("lkfjfdkj", activeCity);
   const handleTabClick = (city) => {
     setActiveCity(city);
   };
@@ -27,11 +52,6 @@ const TabbedTable = () => {
 
   const renderTable = () => {
     // Replace this with your actual table data based on the selected city
-    const tableData = [
-      { route: "Route 1", sales: 50, revenue: 1000 },
-      { route: "Route 2", sales: 30, revenue: 700 },
-      // Add more rows as needed
-    ];
 
     return (
       <table>
@@ -45,9 +65,9 @@ const TabbedTable = () => {
         <tbody>
           {tableData.map((row, index) => (
             <tr key={index}>
-              <td>{row.route}</td>
-              <td>{row.sales}</td>
-              <td>{row.revenue}</td>
+              <td>{row?.route_id}</td>
+              <td>{row?.orders}</td>
+              <td>{row?.tot_price}</td>
             </tr>
           ))}
         </tbody>

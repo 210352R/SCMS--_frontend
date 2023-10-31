@@ -2,14 +2,19 @@ import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import "./AdminViewReports.css";
 import CityDialog from "./CityTableComp";
+import axios from "axios";
+
+import PieChart from "./PieChart";
 
 function ViewReport() {
-  const [selectedYear, setSelectedYear] = useState("2023"); // Initial selected year
+  // year eka-----
+  const [selectedYear, setSelectedYear] = useState("2023");
 
   const handleYearChange = (event) => {
     setSelectedYear(event.target.value);
   };
 
+  //city eka select karanawa -------
   const [selectedCity, setSelectedCity] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -26,11 +31,29 @@ function ViewReport() {
 
   const BarChart = ({ selectedYear }) => {
     const barChartRef = useRef(null);
+    const [quaterArr, setQuaterArr] = useState([0, 0, 0, 0]);
 
     useEffect(() => {
       const ctx = barChartRef.current.getContext("2d");
 
-      // Bar chart eka -------------------------------------------
+      axios
+        .get(`http://localhost:8000/report/getQuartlaryReport/${selectedYear}`)
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.sucess) {
+            const arr = res.data?.data?.map((data) => {
+              if (data?.income_quarter) {
+                console.log("Innerr ----------------------------------");
+                quaterArr[data?.income_quarter - 1] = data?.quarterly_income;
+                console.log("--------", quaterArr);
+              }
+            });
+          }
+        })
+        .catch((err) => {
+          console.log("Error : ", err);
+        });
+      console.log("Array : ", quaterArr);
       // Modify the data based on the selected year
       const data = {
         labels: ["Quater 1", "Quater 2", "Quater 3", "Quater 4"],
@@ -40,7 +63,7 @@ function ViewReport() {
             borderColor: "rgba(75, 192, 192, 1)",
             borderWidth: 2,
             hoverBorderColor: "rgba(75, 192, 192, 1)",
-            data: [23, 34, 56, 76], // ena data tika danna ----------
+            data: quaterArr,
           },
         ],
       };
@@ -69,59 +92,82 @@ function ViewReport() {
     return <canvas ref={barChartRef} />;
   };
 
-  const PieChart = ({ selectedYear }) => {
-    const pieChartRef = useRef(null);
+  // const PieChart = ({ selectedYear }) => {
+  //   const pieChartRef = useRef(null);
+  //   const [labelArray, setLabelArray] = useState([]);
+  //   const [dataArray, setDataArray] = useState([]);
 
-    useEffect(() => {
-      const ctx = pieChartRef.current.getContext("2d");
+  //   useEffect(() => {
+  //     const ctx = pieChartRef.current.getContext("2d");
+  //     axios
+  //       .get(
+  //         `http://localhost:8000/report/getItemsWithMostSales/${selectedYear}`
+  //       )
+  //       .then((res) => {
+  //         console.log("dataset Eka : ", res.data);
+  //         if (res.data.sucess) {
+  //           console.log("In ==", res.data.data);
+  //           let arr1 = res.data?.data?.map((data) => {
+  //             console.log("---->>>", data.name);
+  //             return data?.name;
+  //           });
+  //           console.log("<<<<<<<<<<", arr1);
+  //           setLabelArray(arr1);
 
-      // Modify the data based on the selected year
-      const data = {
-        labels: ["Label 1", "Label 2", "Label 3", "Label 4", "Label 5"], //most sales products tika danna ----------
-        datasets: [
-          {
-            data: [12, 19, 3, 5, 3], // kochchara sales da kiyanaa eka ----------------------
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-              "rgba(255, 206, 86, 0.6)",
-              "rgba(75, 192, 192, 0.6)",
-              "rgba(153, 102, 255, 0.6)",
-            ],
-            hoverBackgroundColor: [
-              "rgba(255, 99, 132, 0.8)",
-              "rgba(54, 162, 235, 0.8)",
-              "rgba(255, 206, 86, 0.8)",
-              "rgba(75, 192, 192, 0.8)",
-              "rgba(153, 102, 255, 0.8)",
-            ],
-          },
-        ],
-      };
+  //           let arr2 = res.data?.data?.map((data) => data?.total_quantity);
+  //           console.log("<<<<<<<<<<", arr2);
+  //           setDataArray(arr2);
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log("Error : ", err);
+  //       });
 
-      const existingPieChart = pieChartRef.current.chart;
+  //     // Modify the data based on the selected year
+  //     const data = {
+  //       labels: labelArray,
+  //       datasets: [
+  //         {
+  //           data: dataArray,
+  //           backgroundColor: [
+  //             "rgba(255, 99, 132, 0.6)",
+  //             "rgba(54, 162, 235, 0.6)",
+  //             "rgba(255, 206, 86, 0.6)",
+  //             "rgba(75, 192, 192, 0.6)",
+  //             "rgba(153, 102, 255, 0.6)",
+  //           ],
+  //           hoverBackgroundColor: [
+  //             "rgba(255, 99, 132, 0.8)",
+  //             "rgba(54, 162, 235, 0.8)",
+  //             "rgba(255, 206, 86, 0.8)",
+  //             "rgba(75, 192, 192, 0.8)",
+  //             "rgba(153, 102, 255, 0.8)",
+  //           ],
+  //         },
+  //       ],
+  //     };
 
-      if (existingPieChart) {
-        existingPieChart.destroy();
-      }
+  //     const existingPieChart = pieChartRef.current.chart;
 
-      const newPieChart = new Chart(ctx, {
-        type: "pie",
-        data: data,
-        options: {
-          maintainAspectRatio: false,
-          responsive: true,
-        },
-      });
+  //     if (existingPieChart) {
+  //       existingPieChart.destroy();
+  //     }
 
-      pieChartRef.current.chart = newPieChart;
-    }, [selectedYear]);
+  //     const newPieChart = new Chart(ctx, {
+  //       type: "pie",
+  //       data: data,
+  //       options: {
+  //         maintainAspectRatio: false,
+  //         responsive: true,
+  //       },
+  //     });
+  //     pieChartRef.current.chart = newPieChart;
+  //   }, [selectedYear]);
 
-    return <canvas ref={pieChartRef} />;
-  };
+  //   return <canvas ref={pieChartRef} />;
+  // };
 
   const WorkingHoursTable = () => {
-    // working Hours ------------
     const workersData = [
       { id: 1, name: "John", jobTitle: "Driver", workedHours: "23 hrs" },
       // Add more worker data as needed
@@ -152,7 +198,7 @@ function ViewReport() {
   };
 
   const TruckHoursTable = () => {
-    // Sample truck data array-------------------------------
+    // Sample truck data array
     const truckData = [
       { id: 1, truckId: "TRK001", model: "Model X", usedHours: 45 },
       { id: 2, truckId: "TRK002", model: "Model Y", usedHours: 30 },
@@ -256,7 +302,7 @@ function ViewReport() {
 
   return (
     <div>
-      <h1>Sales Report</h1>
+      <h1 className="header1">Sales Report</h1>
       <select
         className="select-list"
         value={selectedYear}
@@ -270,35 +316,35 @@ function ViewReport() {
 
       <div className="one-line">
         <div className="dialog-box">
-          <h3>Quaterly Revenue</h3>
+          <h3 className="header3">Quaterly Revenue</h3>
           <div className="barchart">
             <BarChart selectedYear={selectedYear} />
           </div>
         </div>
 
         <div className="dialog-box">
-          <h3>Items With Most Sales</h3>
+          <h3 className="header3">Items With Most Sales</h3>
           <div className="pieChart">
             <PieChart selectedYear={selectedYear} />
           </div>
         </div>
       </div>
 
-      <h2>Sales based cities</h2>
+      <h2 className="header2">Sales based cities</h2>
       <div className="dialog-box">
-        <CityDialog />
+        <CityDialog selectedYear={selectedYear} />
       </div>
 
-      <h2>Working Hours of Drivers and assistants</h2>
+      <h2 className="header2">Working Hours of Drivers and assistants</h2>
       <div className="dialog-box">
         <WorkingHoursTable />
       </div>
 
-      <h2>Trucks Used Hours</h2>
+      <h2 className="header2">Trucks Used Hours</h2>
       <div className="dialog-box">
         <TruckHoursTable />
       </div>
-      <h2>View Customer Orders</h2>
+      <h2 className="header2">View Customer Orders</h2>
       <OrderButton />
     </div>
   );

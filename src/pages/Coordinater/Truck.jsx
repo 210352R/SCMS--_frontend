@@ -77,7 +77,7 @@ export default function Truck() {
         );
         axios
           .get(
-            `http://localhost:8000/truckcoordinater/getValidAllDrivers/${date}/${time}/${route?.max_time}`
+            `http://localhost:8000/truckcoordinater/getValidAllDrivers/${date}/${time}/${route?.max_time}/${storeId}`
           )
           .then((resTrucks) => {
             if (resTrucks.data.sucess) {
@@ -90,7 +90,7 @@ export default function Truck() {
 
         axios
           .get(
-            `http://localhost:8000/truckcoordinater/getValidAll_A_Drivers/${date}/${time}/${route?.max_time}`
+            `http://localhost:8000/truckcoordinater/getValidAll_A_Drivers/${date}/${time}/${route?.max_time}/${storeId}`
           )
           .then((resTrucks) => {
             if (resTrucks.data.sucess) {
@@ -242,6 +242,9 @@ export default function Truck() {
   console.log("Driver List : ", driverList);
 
   console.log("Store ID ----- ", storeId);
+
+  console.log("ADriver List : ", ADriverList);
+  console.log("DriverList", driverList);
 
   return (
     <div>
