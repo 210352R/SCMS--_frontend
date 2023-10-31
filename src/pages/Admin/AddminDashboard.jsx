@@ -421,12 +421,14 @@ export default function AddminDashboard({ children, id }) {
                 </ListItemButton>
               </Link>
 
-              <ListItemButton>
-                <ListItemIcon>
-                  <BarChartIcon />
-                </ListItemIcon>
-                <ListItemText primary="Reports" />
-              </ListItemButton>
+              <Link to={`/reportpage/${id}`}>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <BarChartIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Reports" />
+                </ListItemButton>
+              </Link>
 
               <Link to={`/adminstorelist/${id}`} className="link-no-decoration">
                 <ListItemButton>

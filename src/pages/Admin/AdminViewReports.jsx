@@ -6,7 +6,11 @@ import axios from "axios";
 
 import PieChart from "./PieChart";
 
+import { Link, useParams } from "react-router-dom";
+import AddminDashboard from "./AddminDashboard";
+
 function ViewReport() {
+  const { id } = useParams();
   // year eka-----
   const [selectedYear, setSelectedYear] = useState("2023");
 
@@ -168,10 +172,33 @@ function ViewReport() {
   // };
 
   const WorkingHoursTable = () => {
-    const workersData = [
-      { id: 1, name: "John", jobTitle: "Driver", workedHours: "23 hrs" },
-      // Add more worker data as needed
-    ];
+    // const workersData = [
+    //   { id: 1, name: "John", jobTitle: "Driver", workedHours: "23 hrs" },
+    //   // Add more worker data as needed
+    // ];
+
+    const [workersData, setWorkersData] = useState([{}]);
+
+    useEffect(() => {
+      console.log(
+        "------------ Helloooooooooooo work hours Employeee  --- ---- -- "
+      );
+      axios
+        .get(
+          `http://localhost:8000/report/getWorkHoursOfEmployees/${selectedYear}`
+        )
+        .then((res) => {
+          if (res.data.sucess) {
+            console.log("Innerr ----------------------------------");
+            console.log(res.data.data);
+            setWorkersData(res.data?.data);
+            //setQuaterArr(res.data?.data);
+          }
+        })
+        .catch((err) => {
+          console.log("Error : ", err);
+        });
+    }, [selectedYear]);
 
     return (
       <div className="working-hours-container">
@@ -185,10 +212,10 @@ function ViewReport() {
           </thead>
           <tbody>
             {workersData.map((worker) => (
-              <tr key={worker.id}>
-                <td>{worker.name}</td>
-                <td>{worker.jobTitle}</td>
-                <td>{worker.workedHours}</td>
+              <tr>
+                <td>{worker.username}</td>
+                <td>{worker.type}</td>
+                <td>{worker.tot_time}</td>
               </tr>
             ))}
           </tbody>
@@ -199,11 +226,34 @@ function ViewReport() {
 
   const TruckHoursTable = () => {
     // Sample truck data array
-    const truckData = [
-      { id: 1, truckId: "TRK001", model: "Model X", usedHours: 45 },
-      { id: 2, truckId: "TRK002", model: "Model Y", usedHours: 30 },
-      // Add more truck data as needed
-    ];
+    // const truckData = [
+    //   { id: 1, truckId: "TRK001", model: "Model X", usedHours: 45 },
+    //   { id: 2, truckId: "TRK002", model: "Model Y", usedHours: 30 },
+    //   // Add more truck data as needed
+    // ];
+
+    const [truckData, setTruckData] = useState([{}]);
+
+    useEffect(() => {
+      console.log(
+        "------------ Helloooooooooooo work hours Employeee  --- ---- -- "
+      );
+      axios
+        .get(
+          `http://localhost:8000/report/getWorkHoursOfTrucks/${selectedYear}`
+        )
+        .then((res) => {
+          if (res.data.sucess) {
+            console.log("Innerr ----------------------------------");
+            console.log(res.data.data);
+            setTruckData(res.data?.data);
+            //setQuaterArr(res.data?.data);
+          }
+        })
+        .catch((err) => {
+          console.log("Error : ", err);
+        });
+    }, [selectedYear]);
 
     return (
       <div className="truck-hours-container">
@@ -211,16 +261,16 @@ function ViewReport() {
           <thead>
             <tr>
               <th>Truck ID</th>
-              <th>Model</th>
+              <th>Year</th>
               <th>Used Hours</th>
             </tr>
           </thead>
           <tbody>
             {truckData.map((truck) => (
-              <tr key={truck.id}>
-                <td>{truck.truckId}</td>
-                <td>{truck.model}</td>
-                <td>{`${truck.usedHours} hrs`}</td>
+              <tr>
+                <td>{truck?.truck_id}</td>
+                <td>{truck?.year}</td>
+                <td>{`${truck?.total_work_hours} hrs`}</td>
               </tr>
             ))}
           </tbody>
@@ -301,52 +351,54 @@ function ViewReport() {
   };
 
   return (
-    <div>
-      <h1 className="header1">Sales Report</h1>
-      <select
-        className="select-list"
-        value={selectedYear}
-        onChange={handleYearChange}
-      >
-        <option value="2022">2022</option>
-        <option value="2023">2023</option>
-        <option value="2024">2024</option>
-        {/* Add more years as needed */}
-      </select>
+    <AddminDashboard id={id}>
+      <div>
+        <h1 className="header1">Sales Report</h1>
+        <select
+          className="select-list"
+          value={selectedYear}
+          onChange={handleYearChange}
+        >
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          {/* Add more years as needed */}
+        </select>
 
-      <div className="one-line">
-        <div className="dialog-box">
-          <h3 className="header3">Quaterly Revenue</h3>
-          <div className="barchart">
-            <BarChart selectedYear={selectedYear} />
+        <div className="one-line">
+          <div className="dialog-box">
+            <h3 className="header3">Quaterly Revenue</h3>
+            <div className="barchart">
+              <BarChart selectedYear={selectedYear} />
+            </div>
+          </div>
+
+          <div className="dialog-box">
+            <h3 className="header3">Items With Most Sales</h3>
+            <div className="pieChart">
+              <PieChart selectedYear={selectedYear} />
+            </div>
           </div>
         </div>
 
+        <h2 className="header2">Sales based cities</h2>
         <div className="dialog-box">
-          <h3 className="header3">Items With Most Sales</h3>
-          <div className="pieChart">
-            <PieChart selectedYear={selectedYear} />
-          </div>
+          <CityDialog selectedYear={selectedYear} />
         </div>
-      </div>
 
-      <h2 className="header2">Sales based cities</h2>
-      <div className="dialog-box">
-        <CityDialog selectedYear={selectedYear} />
-      </div>
+        <h2 className="header2">Working Hours of Drivers and assistants</h2>
+        <div className="dialog-box">
+          <WorkingHoursTable />
+        </div>
 
-      <h2 className="header2">Working Hours of Drivers and assistants</h2>
-      <div className="dialog-box">
-        <WorkingHoursTable />
+        <h2 className="header2 ">Trucks Used Hours</h2>
+        <div className="dialog-box">
+          <TruckHoursTable />
+        </div>
+        <h2 className="header2">View Customer Orders</h2>
+        <OrderButton />
       </div>
-
-      <h2 className="header2">Trucks Used Hours</h2>
-      <div className="dialog-box">
-        <TruckHoursTable />
-      </div>
-      <h2 className="header2">View Customer Orders</h2>
-      <OrderButton />
-    </div>
+    </AddminDashboard>
   );
 }
 export default ViewReport;
