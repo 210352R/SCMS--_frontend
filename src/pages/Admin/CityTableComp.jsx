@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import axios from "axios";
 
 const TabbedTable = ({ selectedYear }) => {
+  const cityDictionary = {S001: 'Colombo',S002: 'Kandy',S003: 'Negombo',S004: 'Galle',S005: 'Jaffna'};
+
   const cities = ["S001", "S002", "S003", "S004", "S005"];
   const [activeCity, setActiveCity] = useState("S001");
 
@@ -45,7 +47,7 @@ const TabbedTable = ({ selectedYear }) => {
         className={`tab ${activeCity === city ? "active" : ""}`}
         onClick={() => handleTabClick(city)}
       >
-        {city}
+         {cityDictionary[city]}
       </div>
     ));
   };

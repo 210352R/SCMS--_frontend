@@ -10,30 +10,34 @@ const PieChart = ({ selectedYear }) => {
   const [dataArray, setDataArray] = useState([]);
 
   useEffect(() => {
-    const ctx = pieChartRef.current.getContext("2d");
-    axios
-      .get(`http://localhost:8000/report/getItemsWithMostSales/${selectedYear}`)
-      .then((res) => {
+    const fetchDataAndCreateChart = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8000/report/getItemsWithMostSales/${selectedYear}`);
         console.log("dataset Eka : ", res.data);
         if (res.data.sucess) {
           console.log("In ==", res.data.data);
-          let arr1 = res.data?.data?.map((data) => {
-            console.log("---->>>", data.name);
-            return data?.name;
-          });
+          const arr1 = res.data?.data?.map((data) => data?.name);
           console.log("<<<<<<<<<<", arr1);
           setLabelArray(arr1);
 
-          let arr2 = res.data?.data?.map((data) => data?.total_quantity);
+          const arr2 = res.data?.data?.map((data) => data?.total_quantity);
           console.log("<<<<<<<<<<", arr2);
           setDataArray(arr2);
         }
-      })
-      .catch((err) => {
+      } catch (err) {
         console.log("Error : ", err);
-      });
+      }
+    };
 
-    // Modify the data based on the selected year
+    fetchDataAndCreateChart();
+  }, [selectedYear]);
+
+  useEffect(() => {
+    createChart();
+  }, [labelArray, dataArray]);
+
+  const createChart = () => {
+    const ctx = pieChartRef.current.getContext("2d");
     const data = {
       labels: labelArray,
       datasets: [
@@ -72,8 +76,9 @@ const PieChart = ({ selectedYear }) => {
       },
     });
     pieChartRef.current.chart = newPieChart;
-  }, [selectedYear]);
+  };
 
   return <canvas ref={pieChartRef} />;
 };
+
 export default PieChart;

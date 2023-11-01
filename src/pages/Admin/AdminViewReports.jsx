@@ -3,7 +3,7 @@ import Chart from "chart.js/auto";
 import "./AdminViewReports.css";
 import CityDialog from "./CityTableComp";
 import axios from "axios";
-
+import OrderList from "./getOrderList";
 import PieChart from "./PieChart";
 
 import { Link, useParams } from "react-router-dom";
@@ -96,86 +96,9 @@ function ViewReport() {
     return <canvas ref={barChartRef} />;
   };
 
-  // const PieChart = ({ selectedYear }) => {
-  //   const pieChartRef = useRef(null);
-  //   const [labelArray, setLabelArray] = useState([]);
-  //   const [dataArray, setDataArray] = useState([]);
-
-  //   useEffect(() => {
-  //     const ctx = pieChartRef.current.getContext("2d");
-  //     axios
-  //       .get(
-  //         `http://localhost:8000/report/getItemsWithMostSales/${selectedYear}`
-  //       )
-  //       .then((res) => {
-  //         console.log("dataset Eka : ", res.data);
-  //         if (res.data.sucess) {
-  //           console.log("In ==", res.data.data);
-  //           let arr1 = res.data?.data?.map((data) => {
-  //             console.log("---->>>", data.name);
-  //             return data?.name;
-  //           });
-  //           console.log("<<<<<<<<<<", arr1);
-  //           setLabelArray(arr1);
-
-  //           let arr2 = res.data?.data?.map((data) => data?.total_quantity);
-  //           console.log("<<<<<<<<<<", arr2);
-  //           setDataArray(arr2);
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log("Error : ", err);
-  //       });
-
-  //     // Modify the data based on the selected year
-  //     const data = {
-  //       labels: labelArray,
-  //       datasets: [
-  //         {
-  //           data: dataArray,
-  //           backgroundColor: [
-  //             "rgba(255, 99, 132, 0.6)",
-  //             "rgba(54, 162, 235, 0.6)",
-  //             "rgba(255, 206, 86, 0.6)",
-  //             "rgba(75, 192, 192, 0.6)",
-  //             "rgba(153, 102, 255, 0.6)",
-  //           ],
-  //           hoverBackgroundColor: [
-  //             "rgba(255, 99, 132, 0.8)",
-  //             "rgba(54, 162, 235, 0.8)",
-  //             "rgba(255, 206, 86, 0.8)",
-  //             "rgba(75, 192, 192, 0.8)",
-  //             "rgba(153, 102, 255, 0.8)",
-  //           ],
-  //         },
-  //       ],
-  //     };
-
-  //     const existingPieChart = pieChartRef.current.chart;
-
-  //     if (existingPieChart) {
-  //       existingPieChart.destroy();
-  //     }
-
-  //     const newPieChart = new Chart(ctx, {
-  //       type: "pie",
-  //       data: data,
-  //       options: {
-  //         maintainAspectRatio: false,
-  //         responsive: true,
-  //       },
-  //     });
-  //     pieChartRef.current.chart = newPieChart;
-  //   }, [selectedYear]);
-
-  //   return <canvas ref={pieChartRef} />;
-  // };
+  
 
   const WorkingHoursTable = () => {
-    // const workersData = [
-    //   { id: 1, name: "John", jobTitle: "Driver", workedHours: "23 hrs" },
-    //   // Add more worker data as needed
-    // ];
 
     const [workersData, setWorkersData] = useState([{}]);
 
@@ -225,12 +148,6 @@ function ViewReport() {
   };
 
   const TruckHoursTable = () => {
-    // Sample truck data array
-    // const truckData = [
-    //   { id: 1, truckId: "TRK001", model: "Model X", usedHours: 45 },
-    //   { id: 2, truckId: "TRK002", model: "Model Y", usedHours: 30 },
-    //   // Add more truck data as needed
-    // ];
 
     const [truckData, setTruckData] = useState([{}]);
 
@@ -279,101 +196,53 @@ function ViewReport() {
     );
   };
 
-  const OrderButton = () => {
-    const [customerId, setCustomerId] = useState("");
-    const [customerDetails, setCustomerDetails] = useState(null); // Define customerDetails state
-    const [showDialog, setShowDialog] = useState(false);
-
-    const handleCustomerIdChange = (e) => {
-      setCustomerId(e.target.value);
-    };
-
-    const handleViewOrdersClick = async () => {
-      try {
-        // Replace the URL with your actual API endpoint for fetching customer details
-        const response = await fetch(
-          `https://api.example.com/customers/${customerId}`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch customer details");
-        }
-
-        const data = await response.json();
-
-        // Assuming the response structure is { name, email, orders }
-        setCustomerDetails(data);
-
-        // Show the dialog
-        setShowDialog(true);
-      } catch (error) {
-        console.error("Error fetching customer details:", error.message);
-      }
-    };
-
-    const handleDialogClose = () => {
-      // Close the dialog
-      setShowDialog(false);
-    };
-
-    return (
-      <div>
-        <input
-          className="input-details"
-          type="text"
-          placeholder="Enter Customer ID"
-          value={customerId}
-          onChange={handleCustomerIdChange}
-        />
-        <button className="view-orders-button" onClick={handleViewOrdersClick}>
-          View Customer Orders
-        </button>
-
-        {showDialog && customerDetails && (
-          <div className="order-dialog">
-            <h2>Customer Details</h2>
-            <p>Name: {customerDetails.name}</p>
-            <p>Email: {customerDetails.email}</p>
-            <h3>Orders:</h3>
-            <ul>
-              {customerDetails.orders.map((order) => (
-                <li key={order.orderId}>
-                  Order ID: {order.orderId}, Product: {order.product}, Quantity:{" "}
-                  {order.quantity}
-                </li>
-              ))}
-            </ul>
-            <button onClick={handleDialogClose}>Close</button>
-          </div>
-        )}
-      </div>
-    );
-  };
-
+ 
   return (
     <AddminDashboard id={id}>
+      <nav class='nav'>
+        <ul>
+          <li>
+            <a href="#revenue_and_sales">Revenue and Sales</a>
+          </li>
+          <li>
+             <a href="#city_sales">City Sales</a>
+          </li>
+          <li>
+            <a href="#work_hours">Driver Shifts</a>
+          </li>
+          <li>
+             <a href="#truck_hours">Truck Utilization</a>
+          </li>
+          <li>
+            <a href="#cust_orders">Customer Order Summary</a>
+          </li>
+        </ul>
+      </nav>
+
+
       <div>
-        <h1 className="header1">Sales Report</h1>
+        <h1 className="header1">Sales Report - Year {selectedYear}</h1>
         <select
           className="select-list"
           value={selectedYear}
           onChange={handleYearChange}
         >
+          {/* <option value="Select Year">Select Year</option> */}
           <option value="2022">2022</option>
           <option value="2023">2023</option>
-          <option value="2024">2024</option>
           {/* Add more years as needed */}
         </select>
 
-        <div className="one-line">
-          <div className="dialog-box">
+
+        <div className="one-line" id='revenue_and_sales'>
+          <div className="dialog-box-chart">
             <h3 className="header3">Quaterly Revenue</h3>
             <div className="barchart">
               <BarChart selectedYear={selectedYear} />
             </div>
           </div>
 
-          <div className="dialog-box">
+          <div className="dialog-box-chart">
             <h3 className="header3">Items With Most Sales</h3>
             <div className="pieChart">
               <PieChart selectedYear={selectedYear} />
@@ -381,22 +250,30 @@ function ViewReport() {
           </div>
         </div>
 
-        <h2 className="header2">Sales based cities</h2>
         <div className="dialog-box">
+        <h2 className="header2"  id='city_sales'>Sales based cities</h2>
           <CityDialog selectedYear={selectedYear} />
         </div>
+  
 
-        <h2 className="header2">Working Hours of Drivers and assistants</h2>
+        <section id='work_hours'>
         <div className="dialog-box">
+          <h2 className="header2" >Working Hours of Drivers and assistants</h2>          
           <WorkingHoursTable />
         </div>
+        </section>
 
-        <h2 className="header2 ">Trucks Used Hours</h2>
+        <section >
         <div className="dialog-box">
+          <h2 className="header2 " id='truck_hours'>Trucks Used Hours</h2>          
           <TruckHoursTable />
         </div>
-        <h2 className="header2">View Customer Orders</h2>
-        <OrderButton />
+        </section>
+
+        <section id='cust_orders'>
+        <OrderList selectedYear={selectedYear} />
+        </section>
+
       </div>
     </AddminDashboard>
   );
