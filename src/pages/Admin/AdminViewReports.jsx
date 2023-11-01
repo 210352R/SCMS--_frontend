@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
-import "./AdminViewReports.css";
+//import "./AdminViewReports.css";
 import CityDialog from "./CityTableComp";
 import axios from "axios";
 import OrderList from "./getOrderList";
@@ -199,7 +199,7 @@ function ViewReport() {
  
   return (
     <AddminDashboard id={id}>
-      <nav class='nav'>
+      <nav class='reportNav'>
         <ul>
           <li>
             <a href="#revenue_and_sales">Revenue and Sales</a>

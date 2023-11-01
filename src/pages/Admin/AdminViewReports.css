@@ -1,21 +1,21 @@
-.nav ul {
+.reportNav ul {
   list-style: none;
   display: flex;
   justify-content: space-around;
   margin-top: 50px;
   padding: 20px 0;
-  background-color: #fefefe; /* Background color for the navigation */
+  background-color: #fefefe; /* Background color for the reportNavigation */
   position: fixed;
   top: 0;
   width: 100%;
 
 }
 
-.nav ul li {
+.reportNav ul li {
   margin: 0;
 }
 
-.nav ul li a {
+.reportNav ul li a {
   text-decoration: none;
   color: #0a0a0a;
   padding: 10px;
@@ -23,7 +23,7 @@
   border-bottom: 2px solid transparent; /* Initially transparent border */
 }
 
-.nav ul li a:hover {
+.reportNav ul li a:hover {
   color: #0d0c0c;
   border-bottom: 2px solid #ffffff; /* Change border color on hover */
 }
@@ -33,7 +33,7 @@
     font-size: 36px;
     font-weight: bold;
     color: #ffffff; /* Text color */
-
+    margin-top:40px;
     padding: 20px; /* Adjust padding as needed */
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for embossed effect */
