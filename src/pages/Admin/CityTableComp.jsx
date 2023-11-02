@@ -80,7 +80,7 @@ const TabbedTable = ({ selectedYear }) => {
   return (
     <div className="tabbed-table-container">
       <div className="tabs">{renderTabs()}</div>
-      <div className="table">{renderTable()}</div>
+      <div className="tabbed-table">{renderTable()}</div>
     </div>
   );
 };

@@ -1,0 +1,17 @@
+.home-button {
+    position: fixed; /* Fixed position to stay in the same place while scrolling */
+    top: 10px; /* Adjust top position as needed */
+    left: 10px; /* Adjust left position as needed */
+    background-color: #3498db; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 10px 15px; /* Padding for the button */
+    text-decoration: none; /* Remove underline from the link */
+    border-radius: 5px; /* Add rounded corners */
+    font-weight: bold; /* Make the text bold */
+    cursor: pointer; /* Show pointer cursor on hover */
+  }
+  
+  /* Change button color on hover */
+  .home-button:hover {
+    background-color: #2980b9; /* Adjust color on hover */
+  }

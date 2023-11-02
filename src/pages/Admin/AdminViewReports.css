@@ -8,7 +8,6 @@
   position: fixed;
   top: 0;
   width: 100%;
-
 }
 
 .reportNav ul li {
@@ -128,49 +127,72 @@
   border-bottom: 2px solid #e6260c;
   background-color: #e0e0e0;
 }
-
-.table {
-  margin-top: 10px;
-}
-
-table {
+.tabbed-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
 
-th,
-td {
+.tabbed-table th,
+.tabbed-table td {
   border: 1px solid #ddd;
   padding: 8px;
   color: #ffffff;
   text-align: left;
 }
 
-th {
+.tabbed-table th {
+  background-color:#333;
+  font-size: 18px;
+  width:300px;
+}
+
+.truck-hours-container table {
+  margin-top: 10px;
+}
+
+.truck-hours-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.truck-hours-table th,
+.truck-hours-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.truck-hours-table th {
   background-color:#333;
   font-size: 18px;
 }
 
-.working-hours-container {
-  margin-top: 20px;
+.working-hours-container table {
+  margin-top: 10px;
 }
 
 .working-hours-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
 }
 
 .working-hours-table th,
 .working-hours-table td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: center;
+  color: #ffffff;
+  text-align: left;
 }
 
 .working-hours-table th {
-  background-color: #333;
+  background-color:#333;
+  font-size: 18px;
 }
+
 
 .order-container {
   display: flex;
