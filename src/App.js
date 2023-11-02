@@ -91,7 +91,7 @@ function App() {
         <Route path="/coo_trains/:username" element={<TCTrains />} />
 
         <Route path="/truckPage/:username/:storeId" element={<Truck />} />
-        <Route path="/reportpage" element={<ViewReport />} />
+        <Route path="/reportpage/:id" element={<ViewReport />} />
       </Routes>
     </Router>
     // <>
