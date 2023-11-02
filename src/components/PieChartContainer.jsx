@@ -13,7 +13,7 @@ export default function PieChartContainer() {
       {
         label: "User Data",
         data: UserData.map((data) => data.userGain),
-        backgroundColor: ["green", "blue", "yellow"],
+        backgroundColor: ["green", "orange", "yellow", "red", "blue"],
       },
     ],
   });

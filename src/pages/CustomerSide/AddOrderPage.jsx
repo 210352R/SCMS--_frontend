@@ -192,7 +192,7 @@ export default function AddOrderPage() {
                               <div className="d-flex align-items-center mb-5">
                                 <div className="flex-shrink-0">
                                   <img
-                                    src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp"
+                                    src={`http://localhost:8000/images/${product.product_id}.jpg`}
                                     className="img-fluid"
                                     style={{ width: "150px" }}
                                     alt="Generic placeholder image"
@@ -470,7 +470,7 @@ export default function AddOrderPage() {
                 {/* -- Second Card Item ------------- */}
 
                 {/* // Add products items  ------------------------------------ */}
-                {productsData?.map((product) => {
+                {productsData?.map((product, index) => {
                   return (
                     <>
                       <div className="card rounded-3 mb-4">
@@ -481,9 +481,9 @@ export default function AddOrderPage() {
                           <div className="row d-flex justify-content-between align-items-center">
                             <div className="col-md-2 col-lg-2 col-xl-2">
                               <img
-                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                src={`http://localhost:8000/images/${product.product_id}.jpg`}
                                 className="img-fluid rounded-3"
-                                alt="Cotton T-shirt"
+                                alt={product.name}
                               />
                             </div>
                             <div className="col-md-3 col-lg-3 col-xl-3">

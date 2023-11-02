@@ -215,7 +215,7 @@ function ViewReport() {
               <tr>
                 <td>{worker.username}</td>
                 <td>{worker.type}</td>
-                <td>{worker.tot_time}</td>
+                <td>{worker.tot_time} hrs</td>
               </tr>
             ))}
           </tbody>

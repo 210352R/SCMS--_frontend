@@ -83,8 +83,10 @@ export default function CustomerRegistrationForm() {
         .required("Confirm password is required"),
     }),
     onSubmit(values) {
+      console.log("lngjdngnlgdklj --------------- ");
       delete values.confirmpassword;
       console.log(values);
+      console.log("on the way submit --------------- ");
       axios
         .post("http://localhost:8000/customer/save", values)
         .then((res) => {
