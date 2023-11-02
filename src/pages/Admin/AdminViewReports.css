@@ -1,26 +1,88 @@
-.header1,
-.header2 {
+.reportNav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+  padding: 20px 0;
+  background-color: #fefefe; /* Background color for the reportNavigation */
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.reportNav ul li {
+  margin: 0;
+}
+
+.reportNav ul li a {
+  text-decoration: none;
+  color: #0a0a0a;
+  padding: 10px;
+  transition: color 0.3s ease;
+  border-bottom: 2px solid transparent; /* Initially transparent border */
+}
+
+.reportNav ul li a:hover {
+  color: #0d0c0c;
+  border-bottom: 2px solid #ffffff; /* Change border color on hover */
+}
+
+.header1{
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    color: #ffffff; /* Text color */
+    margin-top:40px;
+    padding: 20px; /* Adjust padding as needed */
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for embossed effect */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a lifted effect */
+  }
+
+.header2,.header3 {
   color: rgb(247, 241, 241);
   margin-top: 10px;
   margin-left: 20px;
   text-align: center;
 }
 
-.select {
-  color: rgb(19, 18, 18);
-  text-align: center;
+.select-list {
+  margin-left: 20px;
+  color: #ddd;
+  width: 120px;
+  background-color: #333;
 }
 
-.dialog-box {
+.dialog-box-chart {
   margin-left: 20px;
+  margin-right:20px;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: #fffefe;
+  background-color:#121111;
   padding: 7px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  max-width: 100%;
+  border: 3px solid #b90d1f;
+  box-shadow: 0 0 10px rgba(237, 232, 232, 0.2);
+  max-width: 800px;
   width: 100%;
+
+}
+
+
+.dialog-box {
+  margin-left: 300px;
+  margin-right:250px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  background-color:#121111;
+  padding: 7px;
+  border-radius: 10px;
+  border: 3px solid #b90d1f;
+  box-shadow: 0 0 10px rgba(237, 232, 232, 0.2);
+  max-width: 800px;
+  width: 100%;
+
 }
 
 .one-line {
@@ -32,7 +94,7 @@
   border: 1px solid #ddd;
   padding: 10px;
   margin: 5px;
-  background-color: #e3dbdb; /* Black background for the barchart component */
+  background-color: #050505; /* Black background for the barchart component */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* White box shadow for contrast */
@@ -41,10 +103,6 @@
   text-align: center; /* Center the chart within the container */
 }
 
-.select-list {
-  margin-left: 20px;
-  width: 100px;
-}
 
 .tabbed-table-container {
   max-width: 600px;
@@ -53,64 +111,88 @@
 
 .tabs {
   display: flex;
-  border-bottom: 1px solid #ccc;
-}
+  background-color: #333;
 
+}
+  
 .tab {
   padding: 10px 20px;
   cursor: pointer;
   border-bottom: 1px solid transparent;
+  width:150px;
 }
 
-.tab:hover {
-  background-color: #f0f0f0;
-}
 
 .tab.active {
-  border-bottom: 2px solid #3498db;
+  border-bottom: 2px solid #e6260c;
   background-color: #e0e0e0;
 }
-
-.table {
-  margin-top: 10px;
-}
-
-table {
+.tabbed-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
 
-th,
-td {
+.tabbed-table th,
+.tabbed-table td {
   border: 1px solid #ddd;
   padding: 8px;
+  color: #ffffff;
   text-align: left;
 }
 
-th {
-  background-color: #f2f2f2;
+.tabbed-table th {
+  background-color:#333;
+  font-size: 18px;
+  width:300px;
 }
 
-.working-hours-container {
-  margin-top: 20px;
+.truck-hours-container table {
+  margin-top: 10px;
+}
+
+.truck-hours-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.truck-hours-table th,
+.truck-hours-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.truck-hours-table th {
+  background-color:#333;
+  font-size: 18px;
+}
+
+.working-hours-container table {
+  margin-top: 10px;
 }
 
 .working-hours-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
 }
 
 .working-hours-table th,
 .working-hours-table td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: center;
+  color: #ffffff;
+  text-align: left;
 }
 
 .working-hours-table th {
-  background-color: #f2f2f2;
+  background-color:#333;
+  font-size: 18px;
 }
+
 
 .order-container {
   display: flex;
@@ -130,44 +212,55 @@ th {
 }
 
 .input-details {
-  margin-left: 20px;
+  margin-left: 300px;
+  background-color: #333;
+  color: #fefefe;
 }
 
 .order-dialog {
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: #121111;
+  border: 1px solid #b90d1f;
   border-radius: 5px;
   padding: 20px;
   margin-top: 20px;
-  max-width: 400px;
+  margin-left: 300px;
+  max-width: 800px;
+  margin-bottom: 20px;
 }
 
 .order-dialog h2 {
-  color: #333;
+  color: #ffffff;
+  text-align: center;
 }
 
 .order-dialog p {
   margin: 5px 0;
+  font-weight: bold;
 }
 
 .order-dialog h3 {
   margin-top: 10px;
-  color: #333;
+  color: #ffffff;
 }
 
-.order-dialog ul {
-  list-style: none;
-  padding: 0;
+.order-dialog th, .order-dialog td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  color: rgb(255, 255, 255); 
 }
 
-.order-dialog li {
-  margin-bottom: 5px;
+.order-dialog th {
+  background-color: #333;
 }
+
 
 .order-dialog button {
+  margin-top: 20px;
   padding: 8px 15px;
-  background-color: #4caf50;
+  background-color: #ec0404;
   color: #fff;
   border: none;
   cursor: pointer;
+  
 }

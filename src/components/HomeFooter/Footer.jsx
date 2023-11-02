@@ -44,13 +44,12 @@ function Footer() {
             {/* Grid column */}
             <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
               {/* Content */}
-              <h6 className="text-uppercase fw-bold mb-4">
-                <i className="fas fa-gem me-3 text-secondary"></i>Company name
+              <h6 style={{ fontSize: '48px' }} className="text-uppercase fw-bold mb-4">
+                <i className="fas fa-gem me-3 text-secondary"></i>Company 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A
               </h6>
               <p>
-                Here you can use rows and columns to organize your footer
-                content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit.
+                
               </p>
             </div>
             {/* Grid column */}
@@ -58,26 +57,18 @@ function Footer() {
             {/* Grid column */}
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
               {/* Links */}
-              <h6 className="text-uppercase fw-bold mb-4">Products</h6>
+              <h6 className="text-uppercase fw-bold mb-4">Delivery Product Categories</h6>
               <p>
-                <a href="/" className="text-reset">
-                  Angular
-                </a>
+                Food and Groceries
               </p>
               <p>
-                <a href="/" className="text-reset">
-                  React
-                </a>
+                Retail and Consumer Goods
               </p>
               <p>
-                <a href="/" className="text-reset">
-                  Vue
-                </a>
+                Building and Construction Materials
               </p>
               <p>
-                <a href="/" className="text-reset">
-                  Laravel
-                </a>
+                Automotive Products
               </p>
             </div>
             {/* Grid column */}
@@ -85,26 +76,21 @@ function Footer() {
             {/* Grid column */}
             <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
               {/* Links */}
-              <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
               <p>
-                <a href="/" className="text-reset">
-                  Pricing
-                </a>
+                <br></br>
+                <br></br>
               </p>
               <p>
-                <a href="/" className="text-reset">
-                  Settings
-                </a>
+                Industrial and Manufacturing Supplies
               </p>
               <p>
-                <a href="/" className="text-reset">
-                  Orders
-                </a>
+                Printed Materials
               </p>
               <p>
-                <a href="/" className="text-reset">
-                  Help
-                </a>
+                Medical Supplies
+              </p>
+              <p>
+                Specialty Products
               </p>
             </div>
             {/* Grid column */}
@@ -114,20 +100,18 @@ function Footer() {
               {/* Links */}
               <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
               <p>
-                <i className="fas fa-home me-3 text-secondary"></i> New York, NY
-                10012, US
+                <i className="fas fa-home me-3 text-secondary"></i> P09/0107 Company A(Private) Ltd No 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;715, Peradeniya Road , Kandy
               </p>
               <p>
                 <i className="fas fa-envelope me-3 text-secondary"></i>
-                info@example.com
+                companyA@gmail.com
               </p>
               <p>
-                <i className="fas fa-phone me-3 text-secondary"></i> + 01 234
-                567 88
+                <i className="fas fa-phone me-3 text-secondary"></i> + 71 30 44 687
               </p>
               <p>
-                <i className="fas fa-print me-3 text-secondary"></i> + 01 234
-                567 89
+                <i className="fas fa-print me-3 text-secondary"></i> + 81 22 45 461
               </p>
             </div>
             {/* Grid column */}

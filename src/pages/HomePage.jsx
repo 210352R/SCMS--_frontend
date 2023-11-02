@@ -10,7 +10,6 @@ import "../styles/HomePage.css";
 import Navbar from "../components/Navbar";
 import Calender from "../components/Calender";
 import OrderCard from "../components/cards/OrderCard";
-import HomeCards from "../components/cards/HomeCards";
 import HomeCardsContainer from "../components/cards/HomeCardsContainer";
 import Footer from "../components/HomeFooter/Footer";
 
