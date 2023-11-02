@@ -1,8 +1,9 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./orderCard.css";
 
-export default function OrderCard({ name, city, address }) {
+export default function OrderCard({ name, city, address, store_id }) {
   return (
     <>
       <div class="card allContainer" style={{ width: "18rem" }}>
@@ -16,9 +17,9 @@ export default function OrderCard({ name, city, address }) {
             {city} {"- "} {name}
           </h5>
           <p class="card-text ">{address}</p>
-          <a href="#" class="btn btn-primary">
+          <Link to={`/storePage/${store_id}`} class="btn btn-primary">
             View Store
-          </a>
+          </Link>
         </div>
       </div>
     </>

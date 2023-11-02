@@ -44,6 +44,7 @@ import TCStoreDetails from "./pages/Coordinater/TCStoreDetails";
 import TCTrains from "./pages/Coordinater/TCTrains";
 import Truck from "./pages/Coordinater/Truck";
 import ViewReport from "./pages/Admin/AdminViewReports";
+import Stores from "./pages/Admin/Stores";
 
 function App() {
   return (
@@ -92,6 +93,7 @@ function App() {
 
         <Route path="/truckPage/:username/:storeId" element={<Truck />} />
         <Route path="/reportpage/:id" element={<ViewReport />} />
+        <Route path="/storePage/:id" element={<Stores />} />
       </Routes>
     </Router>
     // <>

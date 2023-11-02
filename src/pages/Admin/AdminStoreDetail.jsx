@@ -41,6 +41,7 @@ export default function AdminStoreDetail() {
                   name={store.name}
                   city={store.city}
                   address={store.address}
+                  store_id={store?.store_id}
                 />
               </div>
             );
